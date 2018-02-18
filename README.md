@@ -7,7 +7,12 @@ The library makes it possible to:
 - define constraints on fields
 - define constraints on parameters
 - define constraints on returned values
-- validate those constraints at runtime
+
+The library only provides an API to perform validation, but no implementation.
+
+The following known implementations are available:
+
+- [es-validation-validator](https://github.com/rraziel/es-validation-validator)
 
 ## Installation
 
@@ -16,6 +21,36 @@ The module can be installed through npm:
 ```
 npm install es-validation --save
 ```
+
+## Decorators
+
+A number of decorators are available, and can be used on fields, parameters or methods. In the later case, the constraint is placed on the method's returned values.
+
+String elements are converted to Boolean, Number or Date, depending on what type the constraint normally applies to. When relevant, Object elements are converted as well through `toString()`.
+
+| Name               | Boolean            | Number             | String             | Date               | Object/Map         | Array              | Description                                                                        |
+|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|------------------------------------------------------------------------------------|
+| `@AssertFalse`     | :heavy_check_mark: | -                  | :heavy_check_mark: | -                  | :heavy_check_mark: | -                  | The element must be `false`.                                                       |
+| `@AssertTrue`      | :heavy_check_mark: | -                  | :heavy_check_mark: | -                  | :heavy_check_mark: | -                  | The element must be `true`.                                                        |
+| `@NotNull`         | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | The element must not be `null`.                                                    |
+| `@Null`            | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | The element must be `null`.                                                        |
+| `@NotBlank`        | -                  | -                  | :heavy_check_mark: | -                  | :heavy_check_mark: | -                  | The element must not be `null` and contain at least one non-space character.       |
+| `@NotEmpty`        | -                  | -                  | :heavy_check_mark: | -                  | :heavy_check_mark: | :heavy_check_mark: | The element must not be empty (string length, array/map size).                     |
+| `@Size`            | -                  | -                  | :heavy_check_mark: | -                  | :heavy_check_mark: | :heavy_check_mark: | The element must be within a size range (string length, array/map size).           |
+| `@Pattern`         | -                  | -                  | :heavy_check_mark: | -                  | :heavy_check_mark: | -                  | The element must match a regular expression.                                       |
+| `@Max`             | -                  | :heavy_check_mark: | :heavy_check_mark: | -                  | :heavy_check_mark: | -                  | The element must be a number that is lower than or equal to a maximum.             |
+| `@Min`             | -                  | :heavy_check_mark: | :heavy_check_mark: | -                  | :heavy_check_mark: | -                  | The element must be a number that is higher than or equal to a minimum.            |
+| `@PositiveOrZero`  | -                  | :heavy_check_mark: | :heavy_check_mark: | -                  | :heavy_check_mark: | -                  | The element must be a number that is higher than or equal to `0`.                  |
+| `@Positive`        | -                  | :heavy_check_mark: | :heavy_check_mark: | -                  | :heavy_check_mark: | -                  | The element must be a number that is higher than `0`.                              |
+| `@NegativeOrZero`  | -                  | :heavy_check_mark: | :heavy_check_mark: | -                  | :heavy_check_mark: | -                  | The element must be a number that is lower than or equal to `0`.                   |
+| `@Negative`        | -                  | :heavy_check_mark: | :heavy_check_mark: | -                  | :heavy_check_mark: | -                  | The element must be a number that is lower than `0`.                               |
+| `@Digits`          | -                  | :heavy_check_mark: | :heavy_check_mark: | -                  | :heavy_check_mark: | -                  | The element must be a number with a set maximum of integral and fractional digits. |
+| `@FutureOrPresent` | -                  | -                  | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | -                  | The element must be a date set in the future or now.                               |
+| `@Future`          | -                  | -                  | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | -                  | The element must be a date set in the future.                                      |
+| `@PastOrPresent`   | -                  | -                  | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | -                  | The element must be a date set in the past or now.                                 |
+| `@Past`            | -                  | -                  | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | -                  | The element must be a date set in the past.                                        |
+| `@Email`           | -                  | -                  | :heavy_check_mark: | -                  | :heavy_check_mark: | -                  | The element must be a valid email address.                                         |
+| `@Valid`           | -                  | -                  | -                  | -                  | :heavy_check_mark: | :heavy_check_mark: | The element's field must be validated.                                             |
 
 ## Development
 
@@ -30,4 +65,3 @@ It is also possible to keep unit tests executing as a background task:
 ```
 npm run test
 ```
-
