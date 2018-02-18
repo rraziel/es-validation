@@ -1,0 +1,55 @@
+{
+  "name": "es-validation",
+  "version": "0.1.0",
+  "description": "ECMAScript decorators for validation, inspired by JSR-303, JSR-349 and JSR-380.",
+  "homepage": "https://github.com/rraziel/es-validation",
+  "bugs": "https://github.com/rraziel/es-validation/issues",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rraziel/es-validation.git"
+  },
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc -p .",
+    "test": "./node_modules/.bin/jest --watch --no-cache --verbose",
+    "coverage": "./node_modules/.bin/jest --no-cache --coverage",
+    "tslint": "tslint --project ./tsconfig.json --config ./conf/tslint.json '**/*.ts' --exclude '**/node_modules/**'"
+  },
+  "jest": {
+    "mapCoverage": true,
+    "collectCoverageFrom": [
+      "src/**/*.ts",
+      "!src/**/index.ts"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "js",
+      "json"
+    ],
+    "roots": [
+      "<rootDir>/src"
+    ],
+    "testResultsProcessor": "<rootDir>/node_modules/jest-junit-reporter",
+    "testRegex": "\\.spec\\.ts",
+    "transform": {
+      "^.+\\.ts$": "ts-jest"
+    }
+  },
+  "dependencies": {
+    "reflect-metadata": "0.1.12"
+  },
+  "devDependencies": {
+    "@types/jest": "22.1.2",
+    "@types/node": "9.4.6",
+    "codecov": "3.0.0",
+    "jest": "22.1.4",
+    "jest-create-mock-instance": "1.0.2",
+    "jest-junit-reporter": "1.1.0",
+    "json-loader": "0.5.7",
+    "ts-jest": "22.0.4",
+    "ts-node": "4.1.0",
+    "tslint": "5.9.1",
+    "typescript": "2.6.2"
+  }
+}
