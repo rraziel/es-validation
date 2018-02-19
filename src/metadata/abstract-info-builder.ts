@@ -13,8 +13,13 @@ abstract class AbstractInfoBuilder<C extends ConstraintInfo, T extends AbstractI
      * @return this
      */
     assert(booleanAssertion: boolean): AbstractInfoBuilder<C, T> {
-        // TODO: throw if assert was already called
-        return this;
+        return this.update(constraintInfo => {
+            if (booleanAssertion) {
+                constraintInfo.assertTrue = true;
+            } else {
+                constraintInfo.assertFalse = true;
+            }
+        });
     }
 
     /**
@@ -44,7 +49,13 @@ abstract class AbstractInfoBuilder<C extends ConstraintInfo, T extends AbstractI
      * @return this
      */
     future(orPresent?: boolean): AbstractInfoBuilder<C, T> {
-        return this;
+        return this.update(constraintInfo => {
+            if (orPresent) {
+                constraintInfo.futureOrPresent = true;
+            } else {
+                constraintInfo.future = true;
+            }
+        });
     }
 
     /**
@@ -112,7 +123,13 @@ abstract class AbstractInfoBuilder<C extends ConstraintInfo, T extends AbstractI
      * @return this
      */
     past(orPresent?: boolean): AbstractInfoBuilder<C, T> {
-        return this;
+        return this.update(constraintInfo => {
+            if (orPresent) {
+                constraintInfo.pastOrPresent = true;
+            } else {
+                constraintInfo.past = true;
+            }
+        });
     }
 
     /**

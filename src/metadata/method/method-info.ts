@@ -21,7 +21,7 @@ interface MethodInfo extends ConstraintInfo {
  * @return Method information
  */
 function getMethodInfo<C extends Function>(objectClass: C, methodName?: string): MethodInfo {
-    let methodInfo: MethodInfo = Reflect.getOwnMetadata(MethodInfoMetadata, objectClass, methodName);
+    let methodInfo: MethodInfo = Reflect.getOwnMetadata(MethodInfoMetadata, objectClass, methodName) || {};
     return methodInfo;
 }
 

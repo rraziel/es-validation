@@ -1,6 +1,6 @@
 import {AbstractInfoBuilder} from '../abstract-info-builder';
 import {ConstraintInfo} from '../constraint-info';
-import {MethodInfoBuilder} from '../method';
+import {getMethodInfo, setMethodInfo, MethodInfo, MethodInfoBuilder} from '../method';
 import {MethodParameterInfo} from './method-parameter-info';
 
 /**
@@ -31,7 +31,8 @@ class MethodParameterInfoBuilder extends AbstractInfoBuilder<MethodParameterInfo
      * @return Constraint information
      */
     protected getConstraintInfo(): ConstraintInfo {
-        return null;
+        let methodInfo: MethodInfo = getMethodInfo(this.target.constructor, <string> this.propertyKey);
+        return (methodInfo.parameters && methodInfo.parameters[this.parameterIndex]) || {};
     }
 
     /**
@@ -39,7 +40,13 @@ class MethodParameterInfoBuilder extends AbstractInfoBuilder<MethodParameterInfo
      * @param constraintInfo Constraint information
      */
     protected setConstraintInfo(constraintInfo: ConstraintInfo): void {
-
+        let methodInfo: MethodInfo = getMethodInfo(this.target.constructor, <string> this.propertyKey);
+        methodInfo.parameters = methodInfo.parameters || [];
+        while (!(this.parameterIndex < methodInfo.parameters.length)) {
+            methodInfo.parameters.push(null);
+        }
+        methodInfo.parameters[this.parameterIndex] = constraintInfo;
+        setMethodInfo(this.target.constructor, <string> this.propertyKey, methodInfo);
     }
 
     /**

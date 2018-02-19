@@ -20,7 +20,7 @@ interface PropertyInfo extends ConstraintInfo {
  * @return Property information
  */
 function getPropertyInfo<C extends Function>(objectClass: C, propertyName: string): PropertyInfo {
-    let propertyInfo: PropertyInfo = Reflect.getOwnMetadata(PropertyInfoMetadata, objectClass, propertyName);
+    let propertyInfo: PropertyInfo = Reflect.getOwnMetadata(PropertyInfoMetadata, objectClass, propertyName) || {};
     return propertyInfo;
 }
 

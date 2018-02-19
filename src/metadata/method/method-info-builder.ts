@@ -5,7 +5,7 @@ import {getMethodInfo, setMethodInfo, MethodInfo} from './method-info';
 /**
  * Method information builder
  */
-class MethodInfoBuilder extends AbstractInfoBuilder<MethodInfo, MethodInfoBuilder> {
+class MethodInfoBuilder extends AbstractInfoBuilder<ConstraintInfo, MethodInfoBuilder> {
     private propertyKey: string|symbol;
     private target: Object;
 
@@ -24,16 +24,18 @@ class MethodInfoBuilder extends AbstractInfoBuilder<MethodInfo, MethodInfoBuilde
      * Get the constraint information
      * @return Constraint information
      */
-    protected getConstraintInfo(): MethodInfo {
-        return getMethodInfo(this.target.constructor, <string> this.propertyKey);
+    protected getConstraintInfo(): ConstraintInfo {
+        return getMethodInfo(this.target.constructor, <string> this.propertyKey).returnValue || {};
     }
 
     /**
      * Set the constraint information
      * @param constraintInfo Constraint information
      */
-    protected setConstraintInfo(constraintInfo: MethodInfo): void {
-        setMethodInfo(this.target.constructor, <string> this.propertyKey, constraintInfo);
+    protected setConstraintInfo(constraintInfo: ConstraintInfo): void {
+        let methodInfo: MethodInfo = getMethodInfo(this.target.constructor, <string> this.propertyKey);
+        methodInfo.returnValue = constraintInfo;
+        setMethodInfo(this.target.constructor, <string> this.propertyKey, methodInfo);
     }
 
     /**
