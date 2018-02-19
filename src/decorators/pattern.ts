@@ -6,7 +6,7 @@ import {withInfoBuilder, ValidationDecorator} from './helper';
  * @return Pattern decorator
  */
 function Pattern(regexp: RegExp): ValidationDecorator {
-    return (target, propertyKey, descriptor) => withInfoBuilder(target, propertyKey, descriptor, infoBuilder => infoBuilder.pattern(regexp));
+    return (target, propertyKey, descriptor) => withInfoBuilder('Pattern', target, propertyKey, descriptor, infoBuilder => infoBuilder.pattern(regexp));
 }
 
 export {

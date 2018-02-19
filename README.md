@@ -4,7 +4,7 @@ A set of validation decorators inspired by [JSR-303](http://beanvalidation.org/1
 
 The library makes it possible to:
 
-- define constraints on fields
+- define constraints on properties
 - define constraints on parameters
 - define constraints on returned values
 
@@ -24,7 +24,7 @@ npm install es-validation --save
 
 ## Decorators
 
-A number of decorators are available, and can be used on fields, parameters or functions. In the later case, the constraint is placed on the method's returned values.
+A number of decorators are available, and can be used on properties, parameters or functions. In the later case, the constraint is placed on the method's returned values.
 
 `String` elements are converted to `Boolean`, `Number` or `Date`, depending on what type the constraint normally applies to. When relevant, `Object` elements are converted as well through `toString()`.
 
@@ -50,7 +50,7 @@ A number of decorators are available, and can be used on fields, parameters or f
 | `@PastOrPresent`   | -                  | -                  | :heavy_check_mark: | :heavy_check_mark: | -                  | Must be a date set in the past or now.                                 |
 | `@Past`            | -                  | -                  | :heavy_check_mark: | :heavy_check_mark: | -                  | Must be a date set in the past.                                        |
 | `@Email`           | -                  | -                  | :heavy_check_mark: | -                  | -                  | Must be a valid email address.                                         |
-| `@Valid`           | -                  | -                  | -                  | -                  | :heavy_check_mark: | Fields must be validated (also applies to `Object`).                  |
+| `@Valid`           | -                  | -                  | -                  | -                  | :heavy_check_mark: | Properties must be validated (also applies to `Object`).               |
 
 ## Validation
 

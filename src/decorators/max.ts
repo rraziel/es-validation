@@ -6,7 +6,7 @@ import {withInfoBuilder, ValidationDecorator} from './helper';
  * @return Max decorator
  */
 function Max(maximum: number): ValidationDecorator {
-    return (target, propertyKey, descriptor) => withInfoBuilder(target, propertyKey, descriptor, infoBuilder => infoBuilder.maximum(maximum));
+    return (target, propertyKey, descriptor) => withInfoBuilder('Max', target, propertyKey, descriptor, infoBuilder => infoBuilder.maximum(maximum));
 }
 
 export {

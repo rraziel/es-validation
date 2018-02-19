@@ -6,7 +6,7 @@ import {withInfoBuilder, ValidationDecorator} from './helper';
  * @param propertyKey Property key
  * @param descriptor  Descriptor
  */
-const AssertFalse: ValidationDecorator = (target, propertyKey, descriptor) => withInfoBuilder(target, propertyKey, descriptor, infoBuilder => infoBuilder.assert(false));
+const AssertFalse: ValidationDecorator = (target, propertyKey, descriptor) => withInfoBuilder('AssertFalse', target, propertyKey, descriptor, infoBuilder => infoBuilder.assert(false));
 
 export {
     AssertFalse

@@ -7,7 +7,7 @@ import {withInfoBuilder, ValidationDecorator} from './helper';
  * @return Digits decorator
  */
 function Digits(integer: number, fraction: number): ValidationDecorator {
-    return (target, propertyKey, descriptor) => withInfoBuilder(target, propertyKey, descriptor, infoBuilder => infoBuilder.digits(integer, fraction));
+    return (target, propertyKey, descriptor) => withInfoBuilder('Digits', target, propertyKey, descriptor, infoBuilder => infoBuilder.digits(integer, fraction));
 }
 
 export {

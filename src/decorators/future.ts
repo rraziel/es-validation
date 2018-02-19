@@ -6,7 +6,7 @@ import {withInfoBuilder, ValidationDecorator} from './helper';
  * @param propertyKey Property key
  * @param descriptor  Descriptor
  */
-const Future: ValidationDecorator = (target, propertyKey, descriptor) => withInfoBuilder(target, propertyKey, descriptor, infoBuilder => infoBuilder.future());
+const Future: ValidationDecorator = (target, propertyKey, descriptor) => withInfoBuilder('Future', target, propertyKey, descriptor, infoBuilder => infoBuilder.future());
 
 export {
     Future

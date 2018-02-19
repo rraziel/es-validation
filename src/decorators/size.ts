@@ -7,7 +7,7 @@ import {withInfoBuilder, ValidationDecorator} from './helper';
  * @return Size decorator
  */
 function Size(minimum: number = 0, maximum = Number.MAX_SAFE_INTEGER): ValidationDecorator {
-    return (target, propertyKey, descriptor) => withInfoBuilder(target, propertyKey, descriptor, infoBuilder => infoBuilder.size(minimum, maximum));
+    return (target, propertyKey, descriptor) => withInfoBuilder('Size', target, propertyKey, descriptor, infoBuilder => infoBuilder.size(minimum, maximum));
 }
 
 export {

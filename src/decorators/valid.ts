@@ -6,7 +6,7 @@ import {withInfoBuilder, ValidationDecorator} from './helper';
  * @param propertyKey Property key
  * @param descriptor  Descriptor
  */
-const Valid: ValidationDecorator = (target, propertyKey, descriptor) => withInfoBuilder(target, propertyKey, descriptor, infoBuilder => infoBuilder.valid());
+const Valid: ValidationDecorator = (target, propertyKey, descriptor) => withInfoBuilder('Valid', target, propertyKey, descriptor, infoBuilder => infoBuilder.valid());
 
 export {
     Valid

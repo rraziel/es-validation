@@ -6,7 +6,7 @@ import {withInfoBuilder, ValidationDecorator} from './helper';
  * @return Min decorator
  */
 function Min(minimum: number): ValidationDecorator {
-    return (target, propertyKey, descriptor) => withInfoBuilder(target, propertyKey, descriptor, infoBuilder => infoBuilder.minimum(minimum));
+    return (target, propertyKey, descriptor) => withInfoBuilder('Min', target, propertyKey, descriptor, infoBuilder => infoBuilder.minimum(minimum));
 }
 
 export {

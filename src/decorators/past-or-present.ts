@@ -6,7 +6,7 @@ import {withInfoBuilder, ValidationDecorator} from './helper';
  * @param propertyKey Property key
  * @param descriptor  Descriptor
  */
-const PastOrPresent: ValidationDecorator = (target, propertyKey, descriptor) => withInfoBuilder(target, propertyKey, descriptor, infoBuilder => infoBuilder.past(true));
+const PastOrPresent: ValidationDecorator = (target, propertyKey, descriptor) => withInfoBuilder('PastOrPresent', target, propertyKey, descriptor, infoBuilder => infoBuilder.past(true));
 
 export {
     PastOrPresent
