@@ -3,6 +3,25 @@ import {AbstractInfoBuilder, MethodInfoBuilder, MethodParameterInfoBuilder, Prop
 type ValidationDecorator = <T>(target: Object|Function, propertyKey: string|symbol, descriptor?: TypedPropertyDescriptor<T>|number) => void;
 
 /**
+ * Validator static information builder retrieval parameters
+ * @param decoratorName Decorator name
+ * @param target        Target
+ * @param propertyKey   Property key
+ * @param descriptor    Descriptor
+ */
+function validateInfoBuilderStatic<T>(decoratorName: string, target: Function, propertyKey: string|symbol, descriptor: TypedPropertyDescriptor<T>|number): void {
+    if (descriptor !== undefined) {
+        if (descriptor instanceof Object) {
+            throw new Error('Decorator @' + decoratorName + ' cannot be applied to static method ' + target.name + '.' + <string> propertyKey);
+        } else if (propertyKey !== undefined) {
+            throw new Error('Decorator @' + decoratorName + ' cannot be applied to static method ' + target.name + '.' + <string> propertyKey + ' parameter #' + descriptor);
+        }
+    } else {
+        throw new Error('Decorator @' + decoratorName + ' cannot be applied to static property ' + target.name + '.' + <string> propertyKey);
+    }
+}
+
+/**
  * Get an information builder (static methods and properties)
  * @param decoratorName Decorator name
  * @param target        Target
@@ -13,16 +32,10 @@ type ValidationDecorator = <T>(target: Object|Function, propertyKey: string|symb
 function getInfoBuilderStatic<T>(decoratorName: string, target: Function, propertyKey: string|symbol, descriptor: TypedPropertyDescriptor<T>|number): AbstractInfoBuilder<any, any> {
     let infoBuilder: AbstractInfoBuilder<any, any>;
 
-    if (descriptor !== undefined) {
-        if (descriptor instanceof Object) {
-            throw new Error('Decorator @' + decoratorName + ' cannot be applied to static method ' + target.name + '.' + <string> propertyKey);
-        } else if (propertyKey === undefined) {
-            infoBuilder = MethodParameterInfoBuilder.of(target, propertyKey, descriptor);
-        } else {
-            throw new Error('Decorator @' + decoratorName + ' cannot be applied to static method ' + target.name + '.' + <string> propertyKey + ' parameter #' + descriptor);
-        }
-    } else {
-        throw new Error('Decorator @' + decoratorName + ' cannot be applied to static property ' + target.name + '.' + <string> propertyKey);
+    validateInfoBuilderStatic<T>(decoratorName, target, propertyKey, descriptor);
+
+    if (descriptor !== undefined && !(descriptor instanceof Object) && propertyKey === undefined) {
+        infoBuilder = MethodParameterInfoBuilder.of(target, propertyKey, descriptor);
     }
 
     return infoBuilder;
