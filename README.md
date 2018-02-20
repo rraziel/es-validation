@@ -21,12 +21,6 @@ The library makes it possible to:
 - define constraints on parameters
 - define constraints on returned values
 
-The library only provides an API to perform validation, but no implementation.
-
-The following known implementations are available:
-
-- [es-validation-validator](https://github.com/rraziel/es-validation-validator)
-
 ## Installation
 
 The module can be installed through npm:
@@ -68,6 +62,10 @@ A number of decorators are available, and can be used on properties, parameters 
 ## Validation
 
 The module only provides an interface for validation, but no actual implementation. The implementation must be defined within a separate module.
+
+The following known implementations are available:
+
+- [es-validation-validator](https://github.com/rraziel/es-validation-validator)
 
 ### Validator
 
