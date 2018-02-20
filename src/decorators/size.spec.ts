@@ -64,6 +64,20 @@ describe('@Size decorator', () => {
             expect(methodInfo.returnValue.sizeMax).toEqual(4);
         });
 
+        it('supplies default parameters', () => {
+            // given
+            class TestClass {
+                @Size() method(p: number): void { /* empty */ }
+            }
+            // when
+            let methodInfo: MethodInfo = getMethodInfo(TestClass, 'method');
+            // then
+            expect(methodInfo).not.toBeUndefined();
+            expect(methodInfo.returnValue).not.toBeUndefined();
+            expect(methodInfo.returnValue.sizeMin).toEqual(0);
+            expect(methodInfo.returnValue.sizeMax).toEqual(Number.MAX_SAFE_INTEGER);
+        });
+
     });
 
     describe('throws an error when applied to', () => {

@@ -14,11 +14,7 @@ function getInfoBuilderStatic<T>(decoratorName: string, target: Function, proper
     let infoBuilder: AbstractInfoBuilder<any, any>;
 
     if (descriptor !== undefined && descriptor instanceof Object) {
-        if (propertyKey === undefined) {
-            infoBuilder = MethodInfoBuilder.of(target, propertyKey);
-        } else {
-            throw new Error('Decorator @' + decoratorName + ' cannot be applied to static method ' + target.name + '.' + <string> propertyKey);
-        }
+        throw new Error('Decorator @' + decoratorName + ' cannot be applied to static method ' + target.name + '.' + <string> propertyKey);
     } else if (descriptor !== undefined && !(descriptor instanceof Object)) {
         if (propertyKey === undefined) {
             infoBuilder = MethodParameterInfoBuilder.of(target, propertyKey, descriptor);
