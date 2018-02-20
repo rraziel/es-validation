@@ -1,5 +1,18 @@
 # es-validation
 
+[![AppVeyor](https://img.shields.io/appveyor/ci/rraziel/es-validation/master.svg?label=Win32&style=flat)](https://ci.appveyor.com/project/rraziel/es-validation)
+[![CircleCI](https://img.shields.io/circleci/project/github/rraziel/es-validation/master.svg?label=MacOS&style=flat)](https://circleci.com/gh/rraziel/es-validation)
+[![Travis CI](https://img.shields.io/travis/rraziel/es-validation/master.svg?label=Linux&style=flat)](https://travis-ci.org/rraziel/es-validation)
+[![AppVeyor tests](https://img.shields.io/appveyor/tests/rraziel/es-validation/master.svg?label=Tests&style=flat)](https://ci.appveyor.com/project/rraziel/es-validation/build/tests)
+[![Codecov](https://img.shields.io/codecov/c/github/rraziel/es-validation.svg?label=Coverage&style=flat)](https://codecov.io/gh/rraziel/es-validation)
+[![Code Climate](https://img.shields.io/codeclimate/maintainability/rraziel/es-validation.svg?label=Maintainability&style=flat)](https://codeclimate.com/github/rraziel/es-validation)
+[![Code Climate](https://img.shields.io/codeclimate/issues/github/rraziel/es-validation.svg?label=Code%20Issues&style=flat)](https://codeclimate.com/github/rraziel/es-validation/issues)
+
+[![Dependencies](https://img.shields.io/david/rraziel/es-validation.svg?label=Dependencies&style=flat)](https://david-dm.org/rraziel/es-validation)
+[![Development dependencies](https://img.shields.io/david/dev/rraziel/es-validation.svg?label=Dev%20Dependencies&style=flat)](https://david-dm.org/rraziel/es-validation?type=dev)
+[![Known Vulnerabilities](https://snyk.io/test/github/rraziel/es-validation/badge.svg)](https://snyk.io/test/github/rraziel/es-validation)
+[![Greenkeeper](https://badges.greenkeeper.io/rraziel/es-validation.svg)](https://greenkeeper.io/)
+
 A set of validation decorators inspired by [JSR-303](http://beanvalidation.org/1.0/), [JSR-349](http://beanvalidation.org/1.1/) and [JSR-380](http://beanvalidation.org/2.0/).
 
 The library makes it possible to:
