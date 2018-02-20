@@ -13,6 +13,8 @@ interface ConstraintInfo {
     futureOrPresent?: boolean;
     max?: number;
     min?: number;
+    negative?: boolean;
+    negativeOrZero?: boolean;
     notBlank?: boolean;
     notEmpty?: boolean;
     notNull?: boolean;
@@ -20,6 +22,8 @@ interface ConstraintInfo {
     past?: boolean;
     pastOrPresent?: boolean;
     pattern?: RegExp;
+    positive?: boolean;
+    positiveOrZero?: boolean;
     sizeMin?: number;
     sizeMax?: number;
     valid?: boolean;

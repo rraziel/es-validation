@@ -82,7 +82,13 @@ abstract class AbstractInfoBuilder<C extends ConstraintInfo, T extends AbstractI
      * @return this
      */
     negative(orZero?: boolean): AbstractInfoBuilder<C, T> {
-        return this;
+        return this.update(constraintInfo => {
+            if (orZero) {
+                constraintInfo.negativeOrZero = true;
+            } else {
+                constraintInfo.negative = true;
+            }
+        });
     }
 
     /**
@@ -146,7 +152,13 @@ abstract class AbstractInfoBuilder<C extends ConstraintInfo, T extends AbstractI
      * @return this
      */
     positive(orZero?: boolean): AbstractInfoBuilder<C, T> {
-        return this;
+        return this.update(constraintInfo => {
+            if (orZero) {
+                constraintInfo.positiveOrZero = true;
+            } else {
+                constraintInfo.positive = true;
+            }
+        });
     }
 
     /**

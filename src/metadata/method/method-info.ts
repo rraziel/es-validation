@@ -21,8 +21,13 @@ interface MethodInfo extends ConstraintInfo {
  * @return Method information
  */
 function getMethodInfo<C extends Function>(objectClass: C, methodName?: string): MethodInfo {
-    let methodInfo: MethodInfo = Reflect.getOwnMetadata(MethodInfoMetadata, objectClass, methodName) || {};
-    return methodInfo;
+    if (methodName) {
+        let methodInfo: MethodInfo = Reflect.getOwnMetadata(MethodInfoMetadata, objectClass, methodName) || {};
+        return methodInfo;
+    } else {
+        let methodInfo: MethodInfo = Reflect.getOwnMetadata(MethodInfoMetadata, objectClass) || {};
+        return methodInfo;
+    }
 }
 
 /**
@@ -32,7 +37,11 @@ function getMethodInfo<C extends Function>(objectClass: C, methodName?: string):
  * @param methodInfo     Method information
  */
 function setMethodInfo<C extends Function>(componentClass: C, methodName: string, methodInfo: MethodInfo): void {
-    Reflect.defineMetadata(MethodInfoMetadata, methodInfo, componentClass, methodName);
+    if (methodName) {
+        Reflect.defineMetadata(MethodInfoMetadata, methodInfo, componentClass, methodName);
+    } else {
+        Reflect.defineMetadata(MethodInfoMetadata, methodInfo, componentClass);
+    }
 }
 
 export {
