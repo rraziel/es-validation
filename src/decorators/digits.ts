@@ -1,4 +1,4 @@
-import {withInfoBuilder, ValidationDecorator} from './helper';
+import {getInfoBuilder, ValidationDecorator} from './helper';
 
 /**
  * Create a Digits decorator, used to define that an element must be a number within the accepted range
@@ -7,7 +7,7 @@ import {withInfoBuilder, ValidationDecorator} from './helper';
  * @return Digits decorator
  */
 function Digits(integer: number, fraction: number): ValidationDecorator {
-    return (target, propertyKey, descriptor) => withInfoBuilder('Digits', target, propertyKey, descriptor, infoBuilder => infoBuilder.digits(integer, fraction));
+    return (target, propertyKey, descriptor) => getInfoBuilder('Digits', target, propertyKey, descriptor).digits(integer, fraction);
 }
 
 export {

@@ -1,4 +1,4 @@
-import {withInfoBuilder, ValidationDecorator} from './helper';
+import {getInfoBuilder, ValidationDecorator} from './helper';
 
 /**
  * PastOrPresent decorator, used to define that an element must be a date in the past or the present
@@ -6,7 +6,7 @@ import {withInfoBuilder, ValidationDecorator} from './helper';
  * @param propertyKey Property key
  * @param descriptor  Descriptor
  */
-const PastOrPresent: ValidationDecorator = (target, propertyKey, descriptor) => withInfoBuilder('PastOrPresent', target, propertyKey, descriptor, infoBuilder => infoBuilder.past(true));
+const PastOrPresent: ValidationDecorator = (target, propertyKey, descriptor) => getInfoBuilder('PastOrPresent', target, propertyKey, descriptor).past(true);
 
 export {
     PastOrPresent

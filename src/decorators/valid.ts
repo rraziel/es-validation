@@ -1,4 +1,4 @@
-import {withInfoBuilder, ValidationDecorator} from './helper';
+import {getInfoBuilder, ValidationDecorator} from './helper';
 
 /**
  * Valid decorator, used to define that an element's fields must be validated
@@ -6,7 +6,7 @@ import {withInfoBuilder, ValidationDecorator} from './helper';
  * @param propertyKey Property key
  * @param descriptor  Descriptor
  */
-const Valid: ValidationDecorator = (target, propertyKey, descriptor) => withInfoBuilder('Valid', target, propertyKey, descriptor, infoBuilder => infoBuilder.valid());
+const Valid: ValidationDecorator = (target, propertyKey, descriptor) => getInfoBuilder('Valid', target, propertyKey, descriptor).valid();
 
 export {
     Valid

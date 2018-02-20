@@ -1,4 +1,4 @@
-import {withInfoBuilder, ValidationDecorator} from './helper';
+import {getInfoBuilder, ValidationDecorator} from './helper';
 
 /**
  * Create a Max decorator, used to define that an element must be a number whose value is lower or equal to the specified maximum
@@ -6,7 +6,7 @@ import {withInfoBuilder, ValidationDecorator} from './helper';
  * @return Max decorator
  */
 function Max(maximum: number): ValidationDecorator {
-    return (target, propertyKey, descriptor) => withInfoBuilder('Max', target, propertyKey, descriptor, infoBuilder => infoBuilder.maximum(maximum));
+    return (target, propertyKey, descriptor) => getInfoBuilder('Max', target, propertyKey, descriptor).maximum(maximum);
 }
 
 export {

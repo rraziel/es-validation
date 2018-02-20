@@ -1,4 +1,4 @@
-import {withInfoBuilder, ValidationDecorator} from './helper';
+import {getInfoBuilder, ValidationDecorator} from './helper';
 
 /**
  * Create a Min decorator, used to define that an element must be a number whose value is higher or equal to the specified minimum
@@ -6,7 +6,7 @@ import {withInfoBuilder, ValidationDecorator} from './helper';
  * @return Min decorator
  */
 function Min(minimum: number): ValidationDecorator {
-    return (target, propertyKey, descriptor) => withInfoBuilder('Min', target, propertyKey, descriptor, infoBuilder => infoBuilder.minimum(minimum));
+    return (target, propertyKey, descriptor) => getInfoBuilder('Min', target, propertyKey, descriptor).minimum(minimum);
 }
 
 export {

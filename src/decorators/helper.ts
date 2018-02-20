@@ -8,9 +8,9 @@ type ValidationDecorator = <T>(target: Object|Function, propertyKey: string|symb
  * @param target        Target
  * @param propertyKey   Property key
  * @param descriptor    Descriptor
- * @param callback      Callback that receives an information builder
+ * @return Information builder
  */
-function getInfoBuilderStatic<T>(decoratorName: string, target: Function, propertyKey: string|symbol, descriptor: TypedPropertyDescriptor<T>|number, callback: (infoBuilder: AbstractInfoBuilder<any, any>) => void): AbstractInfoBuilder<any, any> {
+function getInfoBuilderStatic<T>(decoratorName: string, target: Function, propertyKey: string|symbol, descriptor: TypedPropertyDescriptor<T>|number): AbstractInfoBuilder<any, any> {
     let infoBuilder: AbstractInfoBuilder<any, any>;
 
     if (descriptor !== undefined && descriptor instanceof Object) {
@@ -38,9 +38,9 @@ function getInfoBuilderStatic<T>(decoratorName: string, target: Function, proper
  * @param target        Target
  * @param propertyKey   Property key
  * @param descriptor    Descriptor
- * @param callback      Callback that receives an information builder
+ * @return Information builder
  */
-function getInfoBuilderInstance<T>(decoratorName: string, target: Object, propertyKey: string|symbol, descriptor: TypedPropertyDescriptor<T>|number, callback: (infoBuilder: AbstractInfoBuilder<any, any>) => void): AbstractInfoBuilder<any, any> {
+function getInfoBuilderInstance<T>(decoratorName: string, target: Object, propertyKey: string|symbol, descriptor: TypedPropertyDescriptor<T>|number): AbstractInfoBuilder<any, any> {
     let infoBuilder: AbstractInfoBuilder<any, any>;
 
     if (descriptor !== undefined && descriptor instanceof Object) {
@@ -55,26 +55,26 @@ function getInfoBuilderInstance<T>(decoratorName: string, target: Object, proper
 }
 
 /**
- * Perform an operation with an information builder
+ * Get an information builder
  * @param decoratorName Decorator name
  * @param target        Target
  * @param propertyKey   Property key
  * @param descriptor    Descriptor
- * @param callback      Callback that receives an information builder
+ * @return Information builder
  */
-function withInfoBuilder<T>(decoratorName: string, target: Object|Function, propertyKey: string|symbol, descriptor: TypedPropertyDescriptor<T>|number, callback: (infoBuilder: AbstractInfoBuilder<any, any>) => void): void {
+function getInfoBuilder<T>(decoratorName: string, target: Object|Function, propertyKey: string|symbol, descriptor: TypedPropertyDescriptor<T>|number): AbstractInfoBuilder<any, any> {
     let infoBuilder: AbstractInfoBuilder<any, any>;
 
     if (target instanceof Function) {
-        infoBuilder = getInfoBuilderStatic<T>(decoratorName, target, propertyKey, descriptor, callback);
+        infoBuilder = getInfoBuilderStatic<T>(decoratorName, target, propertyKey, descriptor);
     } else {
-        infoBuilder = getInfoBuilderInstance<T>(decoratorName, target, propertyKey, descriptor, callback);
+        infoBuilder = getInfoBuilderInstance<T>(decoratorName, target, propertyKey, descriptor);
     }
 
-    callback(infoBuilder);
+    return infoBuilder;
 }
 
 export {
-    withInfoBuilder,
+    getInfoBuilder,
     ValidationDecorator
 };
