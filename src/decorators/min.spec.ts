@@ -17,7 +17,7 @@ describe('@Min decorator', () => {
             expect(propertyInfo.min).toEqual(5);
         });
 
-        it.skip('a constructor parameter', () => {
+        it('a constructor parameter', () => {
             // given
             class TestClass {
                 constructor(@Min(5) p: number) { /* empty */ }

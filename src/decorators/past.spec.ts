@@ -17,7 +17,7 @@ describe('@Past decorator', () => {
             expect(propertyInfo.past).toEqual(true);
         });
 
-        it.skip('a constructor parameter', () => {
+        it('a constructor parameter', () => {
             // given
             class TestClass {
                 constructor(@Past p: number) { /* empty */ }

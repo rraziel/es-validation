@@ -17,13 +17,14 @@ describe('@AssertTrue decorator', () => {
             expect(propertyInfo.assertTrue).toEqual(true);
         });
 
-        it.skip('a constructor parameter', () => {
+        it('a constructor parameter', () => {
             // given
             class TestClass {
                 constructor(@AssertTrue p: number) { /* empty */ }
             }
             // when
             let methodInfo: MethodInfo = getMethodInfo(TestClass);
+            methodInfo = methodInfo;
             // then
             expect(methodInfo).not.toBeUndefined();
             expect(methodInfo.parameters).not.toBeUndefined();

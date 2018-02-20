@@ -17,7 +17,7 @@ describe('@Max decorator', () => {
             expect(propertyInfo.max).toEqual(5);
         });
 
-        it.skip('a constructor parameter', () => {
+        it('a constructor parameter', () => {
             // given
             class TestClass {
                 constructor(@Max(5) p: number) { /* empty */ }

@@ -17,7 +17,7 @@ describe('@FutureOrPresent decorator', () => {
             expect(propertyInfo.futureOrPresent).toEqual(true);
         });
 
-        it.skip('a constructor parameter', () => {
+        it('a constructor parameter', () => {
             // given
             class TestClass {
                 constructor(@FutureOrPresent p: number) { /* empty */ }

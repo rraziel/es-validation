@@ -17,7 +17,7 @@ describe('@Future decorator', () => {
             expect(propertyInfo.future).toEqual(true);
         });
 
-        it.skip('a constructor parameter', () => {
+        it('a constructor parameter', () => {
             // given
             class TestClass {
                 constructor(@Future p: number) { /* empty */ }

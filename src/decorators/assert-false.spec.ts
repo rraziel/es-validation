@@ -17,7 +17,7 @@ describe('@AssertFalse decorator', () => {
             expect(propertyInfo.assertFalse).toEqual(true);
         });
 
-        it.skip('a constructor parameter', () => {
+        it('a constructor parameter', () => {
             // given
             class TestClass {
                 constructor(@AssertFalse p: number) { /* empty */ }
