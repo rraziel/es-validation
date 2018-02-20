@@ -31,7 +31,8 @@ class MethodParameterInfoBuilder extends AbstractInfoBuilder<MethodParameterInfo
      * @return Constraint information
      */
     protected getConstraintInfo(): ConstraintInfo {
-        let methodInfo: MethodInfo = getMethodInfo(this.target.constructor, <string> this.propertyKey);
+        let objectClass: Function = this.getObjectClass();
+        let methodInfo: MethodInfo = getMethodInfo(objectClass, <string> this.propertyKey);
         return (methodInfo.parameters && methodInfo.parameters[this.parameterIndex]) || {};
     }
 
@@ -40,13 +41,22 @@ class MethodParameterInfoBuilder extends AbstractInfoBuilder<MethodParameterInfo
      * @param constraintInfo Constraint information
      */
     protected setConstraintInfo(constraintInfo: ConstraintInfo): void {
-        let methodInfo: MethodInfo = getMethodInfo(this.target.constructor, <string> this.propertyKey);
+        let objectClass: Function = this.getObjectClass();
+        let methodInfo: MethodInfo = getMethodInfo(objectClass, <string> this.propertyKey);
         methodInfo.parameters = methodInfo.parameters || [];
         while (!(this.parameterIndex < methodInfo.parameters.length)) {
             methodInfo.parameters.push(null);
         }
         methodInfo.parameters[this.parameterIndex] = constraintInfo;
-        setMethodInfo(this.target.constructor, <string> this.propertyKey, methodInfo);
+        setMethodInfo(objectClass, <string> this.propertyKey, methodInfo);
+    }
+
+    /**
+     * Get the object class, where target would be a function for static/constructor methods
+     * @return Object class
+     */
+    private getObjectClass(): Function {
+        return this.target instanceof Function ? this.target :this.target.constructor;
     }
 
     /**
