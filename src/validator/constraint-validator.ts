@@ -20,7 +20,7 @@ interface ConstraintValidator<C extends ConstraintDecorator, T> {
      * @param context Constraint validation context
      * @return true if the value passes the constraint
      */
-    isValid<T>(value: T, context: ConstraintValidationContext): boolean;
+    isValid(value: T, context: ConstraintValidationContext): boolean;
 
 }
 
