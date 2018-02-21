@@ -13,7 +13,7 @@
 [![Known Vulnerabilities](https://snyk.io/test/github/rraziel/es-validation/badge.svg)](https://snyk.io/test/github/rraziel/es-validation)
 [![Greenkeeper](https://badges.greenkeeper.io/rraziel/es-validation.svg)](https://greenkeeper.io/)
 
-A set of validation decorators inspired by [JSR-303](http://beanvalidation.org/1.0/), [JSR-349](http://beanvalidation.org/1.1/) and [JSR-380](http://beanvalidation.org/2.0/).
+A set of constraint validation decorators inspired by [JSR-303](http://beanvalidation.org/1.0/), [JSR-349](http://beanvalidation.org/1.1/) and [JSR-380](http://beanvalidation.org/2.0/).
 
 The library makes it possible to:
 
@@ -65,7 +65,7 @@ The module only provides an interface for validation, but no actual implementati
 
 The following known implementations are available:
 
-- [es-validation-validator](https://github.com/rraziel/es-validation-validator)
+- [es-validation-validator](https://github.com/rraziel/es-validation-validator) (reference implementation)
 
 ### Validator Factory
 
