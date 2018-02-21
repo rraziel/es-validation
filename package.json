@@ -1,5 +1,6 @@
 {
   "name": "es-validation",
+  "author": "Raziel",
   "version": "0.1.0",
   "description": "ECMAScript decorators for validation, inspired by JSR-303, JSR-349 and JSR-380.",
   "homepage": "https://github.com/rraziel/es-validation",
@@ -9,7 +10,8 @@
     "type": "git",
     "url": "https://github.com/rraziel/es-validation.git"
   },
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc -p .",
     "test": "./node_modules/.bin/jest --watch --no-cache --verbose",
