@@ -79,7 +79,7 @@ interface ConstraintViolation<T> {
      * @param <U>          Wrapped type
      * @return Implementation-specific instance
      */
-    unwrap<U>(wrappedClass: ClassConstructor<U>): U;
+    unwrap<U extends ConstraintViolation<T>>(wrappedClass: ClassConstructor<U>): U;
 
 }
 

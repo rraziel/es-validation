@@ -1,9 +1,6 @@
 import {ConstraintViolation} from './constraint-violation';
 import {ClassConstructor} from '../utils';
-
-interface ClassDescriptor {
-
-}
+import {ClassDescriptor} from './class-descriptor';
 
 /**
  * Validator interface
@@ -23,12 +20,12 @@ interface Validator {
     validateReturnValue<T>(object: T, method: Function, returnValue: any): Set<ConstraintViolation<T>>;
 
     /**
-     * Get the implementation-specific instance of the constraint violation (an exception is thrown if the class is not correct)
+     * Get the implementation-specific instance of the validator (an exception is thrown if the class is not correct)
      * @param wrappedClass Wrapped class
      * @param <U>          Wrapped type
      * @return Implementation-specific instance
      */
-    unwrap<U>(wrappedClass: ClassConstructor<U>): U;
+    unwrap<U extends Validator>(wrappedClass: ClassConstructor<U>): U;
 
 }
 
