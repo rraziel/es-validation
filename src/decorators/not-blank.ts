@@ -1,4 +1,5 @@
-import {getInfoBuilder, ValidationDecorator} from './helper';
+import {ConstraintDecorator} from './constraint-decorator';
+import {getInfoBuilder} from './helper';
 
 /**
  * NotBlank decorator, used to define that an element must be not be null and contain at least one non-white character
@@ -6,7 +7,7 @@ import {getInfoBuilder, ValidationDecorator} from './helper';
  * @param propertyKey Property key
  * @param descriptor  Descriptor
  */
-const NotBlank: ValidationDecorator = (target, propertyKey, descriptor) => getInfoBuilder('NotBlank', target, propertyKey, descriptor).notBlank();
+const NotBlank: ConstraintDecorator = (target, propertyKey, descriptor) => getInfoBuilder('NotBlank', target, propertyKey, descriptor).notBlank();
 
 export {
     NotBlank

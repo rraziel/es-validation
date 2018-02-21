@@ -1,5 +1,6 @@
 export {AssertFalse} from './assert-false';
 export {AssertTrue} from './assert-true';
+export {ConstraintDecorator} from './constraint-decorator';
 export {Digits} from './digits';
 export {Email} from './email';
 export {FutureOrPresent} from './future-or-present';

@@ -1,4 +1,5 @@
-import {getInfoBuilder, ValidationDecorator} from './helper';
+import {ConstraintDecorator} from './constraint-decorator';
+import {getInfoBuilder} from './helper';
 
 /**
  * Null decorator, used to define that an element must be null
@@ -6,7 +7,7 @@ import {getInfoBuilder, ValidationDecorator} from './helper';
  * @param propertyKey Property key
  * @param descriptor  Descriptor
  */
-const Null: ValidationDecorator = (target, propertyKey, descriptor) => getInfoBuilder('Null', target, propertyKey, descriptor).null();
+const Null: ConstraintDecorator = (target, propertyKey, descriptor) => getInfoBuilder('Null', target, propertyKey, descriptor).null();
 
 export {
     Null

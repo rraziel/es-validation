@@ -1,7 +1,5 @@
 import {AbstractInfoBuilder, MethodInfoBuilder, MethodParameterInfoBuilder, PropertyInfoBuilder} from '../metadata';
 
-type ValidationDecorator = <T>(target: Object|Function, propertyKey: string|symbol, descriptor?: TypedPropertyDescriptor<T>|number) => void;
-
 /**
  * Validator static information builder retrieval parameters
  * @param decoratorName Decorator name
@@ -84,6 +82,5 @@ function getInfoBuilder<T>(decoratorName: string, target: Object|Function, prope
 }
 
 export {
-    getInfoBuilder,
-    ValidationDecorator
+    getInfoBuilder
 };

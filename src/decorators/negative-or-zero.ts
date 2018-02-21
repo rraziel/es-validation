@@ -1,4 +1,5 @@
-import {getInfoBuilder, ValidationDecorator} from './helper';
+import {ConstraintDecorator} from './constraint-decorator';
+import {getInfoBuilder} from './helper';
 
 /**
  * NegativeOrZero decorator, used to define that an element must be a negative number or zero
@@ -6,7 +7,7 @@ import {getInfoBuilder, ValidationDecorator} from './helper';
  * @param propertyKey Property key
  * @param descriptor  Descriptor
  */
-const NegativeOrZero: ValidationDecorator = (target, propertyKey, descriptor) => getInfoBuilder('NegativeOrZero', target, propertyKey, descriptor).negative(true);
+const NegativeOrZero: ConstraintDecorator = (target, propertyKey, descriptor) => getInfoBuilder('NegativeOrZero', target, propertyKey, descriptor).negative(true);
 
 export {
     NegativeOrZero

@@ -1,4 +1,5 @@
-import {getInfoBuilder, ValidationDecorator} from './helper';
+import {ConstraintDecorator} from './constraint-decorator';
+import {getInfoBuilder} from './helper';
 
 /**
  * Email decorator, used to define that an element must be a valid email address
@@ -6,7 +7,7 @@ import {getInfoBuilder, ValidationDecorator} from './helper';
  * @param propertyKey Property key
  * @param descriptor  Descriptor
  */
-const Email: ValidationDecorator = (target, propertyKey, descriptor) => getInfoBuilder('Email', target, propertyKey, descriptor).email();
+const Email: ConstraintDecorator = (target, propertyKey, descriptor) => getInfoBuilder('Email', target, propertyKey, descriptor).email();
 
 export {
     Email

@@ -67,6 +67,10 @@ The following known implementations are available:
 
 - [es-validation-validator](https://github.com/rraziel/es-validation-validator)
 
+### Validator Factory
+
+The `ValidatorFactory` interface is the entry-point for user code to obtain validator instances, mainly through the `getValidator()` method.
+
 ### Validator
 
 The `Validator` interface is used to perform constraint validation. The following methods are available:
@@ -79,11 +83,17 @@ The `Validator` interface is used to perform constraint validation. The followin
 | `validateParameters()`  | Validate a function call's parameters.   |
 | `validateReturnValue()` | Validate a function call's return value. |
 
-A `Validator` instance is obtained through a `ValidatorFactory`
+A `Validator` instance is obtained through a `ValidatorFactory`.
 
-### Validator Factory
+### Date Provider
 
-TODO.
+The `DateProvider` interface is used to retrieve the current time, which is necessary for various decorators (`@Past`, `@Future`, etc.). It contains a single method:
+
+| Method      | Description           |
+|:------------|:----------------------|
+| `getDate()` | Get the current time. |
+
+There is generally no interaction with this interface from user code, unless new custom decorators dealing with time are defined. In this scenario, the `DateProvider` instance can be obtained through `ConstraintValidationContext`'s `getDateProvider()` method.
 
 ## Development
 
