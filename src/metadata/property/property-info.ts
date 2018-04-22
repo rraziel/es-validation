@@ -15,12 +15,12 @@ interface PropertyInfo extends ConstraintInfo {
 
 /**
  * Get property information
- * @param objectClass  Object class
- * @param propertyName Property name
+ * @param componentClass component class
+ * @param propertyName   Property name
  * @return Property information
  */
-function getPropertyInfo<C extends Function>(objectClass: C, propertyName: string): PropertyInfo {
-    let propertyInfo: PropertyInfo = Reflect.getOwnMetadata(PropertyInfoMetadata, objectClass, propertyName) || {};
+function getPropertyInfo<C extends Function>(componentClass: C, propertyName: string): PropertyInfo {
+    let propertyInfo: PropertyInfo = Reflect.getOwnMetadata(PropertyInfoMetadata, componentClass, propertyName) || {};
     return propertyInfo;
 }
 
