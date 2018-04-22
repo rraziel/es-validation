@@ -21,12 +21,18 @@ The library makes it possible to:
 - define constraints on parameters
 - define constraints on returned values
 
-## Installation
+## Getting Started
 
-The module can be installed through npm:
+The library can be installed using `npm`:
 
 ```
 npm install es-validation --save
+```
+
+Or using `yarn`:
+
+```
+yarn add es-validation
 ```
 
 ## Decorators
