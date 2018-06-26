@@ -42,7 +42,7 @@
     "reflect-metadata": "0.1.12"
   },
   "devDependencies": {
-    "@types/jest": "23.1.1",
+    "@types/jest": "23.1.2",
     "codecov": "3.0.1",
     "jest": "22.4.0",
     "jest-create-mock-instance": "1.0.3",
