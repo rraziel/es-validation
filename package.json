@@ -45,7 +45,7 @@
     "@types/jest": "23.1.1",
     "codecov": "3.0.1",
     "jest": "22.4.0",
-    "jest-create-mock-instance": "1.0.3",
+    "jest-create-mock-instance": "1.1.0",
     "jest-junit-reporter": "1.1.0",
     "json-loader": "0.5.7",
     "ts-jest": "22.4.6",
