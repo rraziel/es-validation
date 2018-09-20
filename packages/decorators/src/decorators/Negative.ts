@@ -1,7 +1,6 @@
-import {
-    addConstraint,
-    ConstraintDecorator
-} from './ConstraintDecorator';
+import { addConstraint } from './addConstraint';
+import { ConstraintDecorator } from './ConstraintDecorator';
+import { ConstraintProperties } from './ConstraintProperties';
 
 /**
  * Negative decorator, used to define that an element must be a negative number
@@ -9,9 +8,15 @@ import {
  * @param propertyKey Property key
  * @param descriptor  Descriptor
  */
-const Negative: ConstraintDecorator = (target, propertyKey, descriptor) => addConstraint(target, propertyKey, descriptor, 'Negative', {
-    zero: false
-});
+const Negative: ConstraintDecorator = <T>(target, propertyKey, descriptor) => {
+    let constraintProperties: ConstraintProperties<T> = new ConstraintProperties<T>(target, propertyKey, descriptor, 'Negative');
+
+    constraintProperties.attributes = {
+        zero: false
+    };
+
+    addConstraint(constraintProperties);
+};
 
 /**
  * NegativeOrZero decorator, used to define that an element must be a negative number or zero
@@ -19,9 +24,16 @@ const Negative: ConstraintDecorator = (target, propertyKey, descriptor) => addCo
  * @param propertyKey Property key
  * @param descriptor  Descriptor
  */
-const NegativeOrZero: ConstraintDecorator = (target, propertyKey, descriptor) => addConstraint(target, propertyKey, descriptor, 'Negative', {
-    zero: true
-}, 'NegativeOrZero');
+const NegativeOrZero: ConstraintDecorator = <T>(target, propertyKey, descriptor) => {
+    let constraintProperties: ConstraintProperties<T> = new ConstraintProperties<T>(target, propertyKey, descriptor, 'Negative');
+
+    constraintProperties.decoratorName = 'NegativeOrZero';
+    constraintProperties.attributes = {
+        zero: true
+    };
+
+    addConstraint(constraintProperties);
+};
 
 export {
     Negative,

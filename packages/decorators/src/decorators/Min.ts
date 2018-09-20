@@ -1,7 +1,6 @@
-import {
-    addConstraint,
-    ConstraintDecorator
-} from './ConstraintDecorator';
+import { addConstraint } from './addConstraint';
+import { ConstraintDecorator } from './ConstraintDecorator';
+import { ConstraintProperties } from './ConstraintProperties';
 
 /**
  * Create a Min decorator, used to define that an element must be a number whose value is higher or equal to the specified minimum
@@ -9,9 +8,15 @@ import {
  * @return Min decorator
  */
 function Min(minimum: number): ConstraintDecorator {
-    return (target, propertyKey, descriptor) => addConstraint(target, propertyKey, descriptor, 'Min', {
-        minimum
-    });
+    return <T>(target, propertyKey, descriptor) => {
+        let constraintProperties: ConstraintProperties<T> = new ConstraintProperties<T>(target, propertyKey, descriptor, 'Min');
+
+        constraintProperties.attributes = {
+            minimum
+        };
+
+        addConstraint(constraintProperties);
+    };
 }
 
 export {

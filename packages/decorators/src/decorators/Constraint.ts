@@ -1,7 +1,6 @@
-import {
-    addConstraint,
-    ConstraintDecorator
-} from './ConstraintDecorator';
+import { addConstraint } from './addConstraint';
+import { ConstraintDecorator } from './ConstraintDecorator';
+import { ConstraintProperties } from './ConstraintProperties';
 
 /**
  * Create a Constraint decorator
@@ -9,9 +8,15 @@ import {
  * @return Constraint decorator
  */
 function Constraint(constraintValidator: <T>(value: T) => boolean): ConstraintDecorator {
-    return (target, propertyKey, descriptor) => addConstraint(target, propertyKey, descriptor, 'Constraint', {
-        validator: constraintValidator
-    });
+    return <T>(target, propertyKey, descriptor) => {
+        let constraintProperties: ConstraintProperties<T> = new ConstraintProperties<T>(target, propertyKey, descriptor, 'Constraint');
+
+        constraintProperties.attributes = {
+            validator: constraintValidator
+        };
+
+        addConstraint(constraintProperties);
+    };
 }
 
 export {

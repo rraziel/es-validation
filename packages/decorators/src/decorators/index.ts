@@ -1,5 +1,7 @@
+export { addConstraint } from './addConstraint';
 export { Constraint } from './Constraint';
 export { ConstraintDecorator } from './ConstraintDecorator';
+export { ConstraintProperties } from './ConstraintProperties';
 export { Defined } from './Defined';
 export { Digits } from './Digits';
 export { Email } from './Email';

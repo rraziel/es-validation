@@ -1,7 +1,6 @@
-import {
-    addConstraint,
-    ConstraintDecorator
-} from './ConstraintDecorator';
+import { addConstraint } from './addConstraint';
+import { ConstraintDecorator } from './ConstraintDecorator';
+import { ConstraintProperties } from './ConstraintProperties';
 
 /**
  * Create a Pattern decorator, used to define that an element must match a regular expression
@@ -9,9 +8,15 @@ import {
  * @return Pattern decorator
  */
 function Pattern(regExp: RegExp): ConstraintDecorator {
-    return (target, propertyKey, descriptor) => addConstraint(target, propertyKey, descriptor, 'Pattern', {
-        regExp: regExp
-    });
+    return <T>(target, propertyKey, descriptor) => {
+        let constraintProperties: ConstraintProperties<T> = new ConstraintProperties<T>(target, propertyKey, descriptor, 'Pattern');
+
+        constraintProperties.attributes = {
+            regExp: regExp
+        };
+
+        addConstraint(constraintProperties);
+    };
 }
 
 export {

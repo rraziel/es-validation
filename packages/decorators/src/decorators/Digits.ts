@@ -1,7 +1,6 @@
-import {
-    addConstraint,
-    ConstraintDecorator
-} from './ConstraintDecorator';
+import { addConstraint } from './addConstraint';
+import { ConstraintDecorator } from './ConstraintDecorator';
+import { ConstraintProperties } from './ConstraintProperties';
 
 /**
  * Create a Digits decorator, used to define that an element must be a number within the accepted range
@@ -10,10 +9,16 @@ import {
  * @return Digits decorator
  */
 function Digits(integer: number, fraction: number): ConstraintDecorator {
-    return (target, propertyKey, descriptor) => addConstraint(target, propertyKey, descriptor, 'Digits', {
-        integer: integer,
-        fraction: fraction
-    });
+    return <T>(target, propertyKey, descriptor) => {
+        let constraintProperties: ConstraintProperties<T> = new ConstraintProperties<T>(target, propertyKey, descriptor, 'Digits');
+
+        constraintProperties.attributes = {
+            integer: integer,
+            fraction: fraction
+        };
+
+        addConstraint(constraintProperties);
+    };
 }
 
 export {

@@ -1,7 +1,6 @@
-import {
-    addConstraint,
-    ConstraintDecorator
-} from './ConstraintDecorator';
+import { addConstraint } from './addConstraint';
+import { ConstraintDecorator } from './ConstraintDecorator';
+import { ConstraintProperties } from './ConstraintProperties';
 
 /**
  * Positive decorator, used to define that an element must be a positive number
@@ -9,9 +8,15 @@ import {
  * @param propertyKey Property key
  * @param descriptor  Descriptor
  */
-const Positive: ConstraintDecorator = (target, propertyKey, descriptor) => addConstraint(target, propertyKey, descriptor, 'Positive', {
-    zero: false
-});
+const Positive: ConstraintDecorator = <T>(target, propertyKey, descriptor) => {
+    let constraintProperties: ConstraintProperties<T> = new ConstraintProperties<T>(target, propertyKey, descriptor, 'Positive');
+
+    constraintProperties.attributes = {
+        zero: false
+    };
+
+    addConstraint(constraintProperties);
+};
 
 /**
  * PositiveOrZero decorator, used to define that an element must be a positive number or zero
@@ -19,9 +24,16 @@ const Positive: ConstraintDecorator = (target, propertyKey, descriptor) => addCo
  * @param propertyKey Property key
  * @param descriptor  Descriptor
  */
-const PositiveOrZero: ConstraintDecorator = (target, propertyKey, descriptor) => addConstraint(target, propertyKey, descriptor, 'Positive', {
-    zero: true
-}, 'PositiveOrZero');
+const PositiveOrZero: ConstraintDecorator = <T>(target, propertyKey, descriptor) => {
+    let constraintProperties: ConstraintProperties<T> = new ConstraintProperties<T>(target, propertyKey, descriptor, 'Positive');
+
+    constraintProperties.decoratorName = 'PositiveOrZero';
+    constraintProperties.attributes = {
+        zero: true
+    };
+
+    addConstraint(constraintProperties);
+};
 
 export {
     Positive,

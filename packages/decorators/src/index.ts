@@ -1,6 +1,8 @@
 export {
+    addConstraint,
     Constraint,
     ConstraintDecorator,
+    ConstraintProperties,
     Defined,
     Digits,
     Email,

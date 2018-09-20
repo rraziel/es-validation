@@ -1,7 +1,6 @@
-import {
-    addConstraint,
-    ConstraintDecorator
-} from './ConstraintDecorator';
+import { addConstraint } from './addConstraint';
+import { ConstraintDecorator } from './ConstraintDecorator';
+import { ConstraintProperties } from './ConstraintProperties';
 
 /**
  * NotNull decorator, used to define that an element must not be null
@@ -9,7 +8,7 @@ import {
  * @param propertyKey Property key
  * @param descriptor  Descriptor
  */
-const NotNull: ConstraintDecorator = (target, propertyKey, descriptor) => addConstraint(target, propertyKey, descriptor, 'NotNull');
+const NotNull: ConstraintDecorator = (target, propertyKey, descriptor) => addConstraint(new ConstraintProperties(target, propertyKey, descriptor, 'NotNull'));
 
 export {
     NotNull
