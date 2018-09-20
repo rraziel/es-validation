@@ -8,14 +8,6 @@ import {
 
 const TestDecorator: ConstraintDecorator = <T>(target, propertyKey, descriptor) => addConstraint(new ConstraintProperties<T>(target, propertyKey, descriptor, 'TestDecorator'));
 
-function TestDecoratorWithAttributes(value: string): ConstraintDecorator {
-    return <T>(target, propertyKey, descriptor) => {
-        let constraintProperties: ConstraintProperties<T> = new ConstraintProperties<T>(target, propertyKey, descriptor, 'TestDecorator');
-        constraintProperties.attributes = {value};
-        addConstraint(constraintProperties);
-    };
-}
-
 const TestDecoratorWithExplicitName: ConstraintDecorator = <T>(target, propertyKey, descriptor) => {
     let constraintProperties: ConstraintProperties<T> = new ConstraintProperties<T>(target, propertyKey, descriptor, 'TestDecorator');
     constraintProperties.decoratorName = 'TestDecoratorName';
@@ -94,6 +86,30 @@ describe('Constraint decorators', () => {
 
     });
 
+    it('can have attributes', () => {
+        // given
+        function TestDecoratorWithAttributes(value: string): ConstraintDecorator {
+            return <T>(target, propertyKey, descriptor) => {
+                let constraintProperties: ConstraintProperties<T> = new ConstraintProperties<T>(target, propertyKey, descriptor, 'TestDecorator');
+                constraintProperties.attributes = {value};
+                addConstraint(constraintProperties);
+            };
+        }
+        class TestClass {
+            @TestDecoratorWithAttributes('test') method(p: number): number { return p; }
+        }
+        // when
+        let classDescriptor: ClassDescriptor<TestClass>|undefined = loadClassDescriptor(TestClass);
+        // then
+        expect(classDescriptor).toBeDefined();
+        expect(classDescriptor!.getMethodDescriptor('method')).toBeDefined();
+        expect(classDescriptor!.getMethodDescriptor('method')!.getPropertyKey()).toBe('method');
+        expect(classDescriptor!.getMethodDescriptor('method')!.getReturnClass()).toBe(Number);
+        expect(classDescriptor!.getMethodDescriptor('method')!.getConstraint('TestDecorator')).toBeDefined();
+        expect(classDescriptor!.getMethodDescriptor('method')!.getConstraint('TestDecorator')!.getAttributes()).toBeDefined();
+        expect(classDescriptor!.getMethodDescriptor('method')!.getConstraint('TestDecorator')!.getAttribute('value')).toBe('test');
+    });
+
     describe('throw an error when applied to', () => {
 
         it('a static method', () => {
@@ -152,5 +168,4 @@ describe('Constraint decorators', () => {
 
     });
 
-    // TODO: with attributes
 });
