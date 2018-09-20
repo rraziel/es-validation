@@ -4,7 +4,7 @@ import { AbstractConstraintValidator } from './AbstractConstraintValidator';
  * Email constraint validator
  */
 class EmailConstraintValidator extends AbstractConstraintValidator<string> {
-    private static readonly REGEXP: RegExp = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/;
+    private static readonly REGEXP: RegExp = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i;
 
     /**
      * Class constructor
