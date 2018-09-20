@@ -42,7 +42,7 @@
       "jest-date-mock"
     ],
     "testResultsProcessor": "<rootDir>/node_modules/jest-junit-reporter",
-    "testRegex": "\\.spec\\.ts", 
+    "testRegex": "\\.spec\\.ts",
     "transform": {
       "^.+\\.ts$": "ts-jest"
     }
@@ -51,7 +51,7 @@
     "@types/jest": "23.3.2",
     "babel-core": "6.26.3",
     "babel-jest": "23.6.0",
-    "codecov": "3.0.4",
+    "codecov": "3.1.0",
     "jest": "23.6.0",
     "jest-create-mock-instance": "1.1.0",
     "jest-date-mock": "1.0.5",
