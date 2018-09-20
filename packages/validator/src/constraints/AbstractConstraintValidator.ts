@@ -71,16 +71,29 @@ abstract class AbstractConstraintValidator<T> extends ConstraintValidator<T> {
         }
 
         if (typeClass === String) {
-            let validatorOptions: ValidatorOptions = context.getValidator().getValidatorOptions();
             let stringValue: string = value as any as string;
+            return this.convertStringValueIfNecessary(stringValue, context);
+        }
 
-            if (validatorOptions.stringAsNumber && this.allowedTypes.indexOf(Number) !== -1) {
-                return this.convertStringToNumber(stringValue);
-            }
+        return undefined;
+    }
 
-            if (validatorOptions.stringAsDate && this.allowedTypes.indexOf(Date) !== -1) {
-                return this.convertStringToDate(stringValue);
-            }
+    /**
+     * Convert the string value to another type if necessary/possible
+     * @param value   Value
+     * @param context Constraint validation context
+     * @return Converted value
+     */
+    private convertStringValueIfNecessary(value: string, context: ConstraintValidationContext): any {
+        let validatorOptions: ValidatorOptions = context.getValidator().getValidatorOptions();
+        let stringValue: string = value as any as string;
+
+        if (validatorOptions.stringAsNumber && this.allowedTypes.indexOf(Number) !== -1) {
+            return this.convertStringToNumber(stringValue);
+        }
+
+        if (validatorOptions.stringAsDate && this.allowedTypes.indexOf(Date) !== -1) {
+            return this.convertStringToDate(stringValue);
         }
 
         return undefined;
