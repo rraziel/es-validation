@@ -7,7 +7,7 @@ export { FalseConstraintValidator } from './FalseConstraintValidator';
 export { MaxConstraintValidator } from './MaxConstraintValidator';
 export { MinConstraintValidator } from './MinConstraintValidator';
 export { NegativeConstraintValidator } from './NegativeConstraintValidator';
-export { NotBlankConstraintValidator } from './NotBlankConstraintDecorator';
+export { NotBlankConstraintValidator } from './NotBlankConstraintValidator';
 export { NotEmptyConstraintValidator } from './NotEmptyConstraintValidator';
 export { NotNullConstraintValidator } from './NotNullConstraintValidator';
 export { NullConstraintValidator } from './NullConstraintValidator';
