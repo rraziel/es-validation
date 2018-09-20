@@ -28,6 +28,8 @@ describe('Constraint decorators', () => {
             // then
             expect(classDescriptor).toBeDefined();
             expect(classDescriptor!.getPropertyDescriptor('property')).toBeDefined();
+            expect(classDescriptor!.getPropertyDescriptor('property')!.getPropertyClass()).toBe(Number);
+            expect(classDescriptor!.getPropertyDescriptor('property')!.getPropertyKey()).toBe('property');
             expect(classDescriptor!.getPropertyDescriptor('property')!.getConstraint('TestDecorator')).toBeDefined();
             expect(classDescriptor!.getPropertyDescriptor('property')!.getConstraint('TestDecorator')!.getName()).toBe('TestDecorator');
         });
