@@ -10,7 +10,7 @@ import {
  */
 function Min(minimum: number): ConstraintDecorator {
     return (target, propertyKey, descriptor) => addConstraint(target, propertyKey, descriptor, 'Min', {
-        minimum: minimum
+        minimum
     });
 }
 

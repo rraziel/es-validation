@@ -49,7 +49,7 @@ class ConstraintViolation<T> {
      * - null if the constraint violation was returned by validateValue() or if it is a constructor parameter
      * @return Leaf object
      */
-    getLeafObject(): Object|null {
+    getLeafObject(): object|null {
         return null; // TODO
     }
 

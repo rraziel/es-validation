@@ -3,12 +3,14 @@
         "class-name": true,
         "curly": true,
         "eofline": true,
+        "prefer-const": false,
         "indent": [true,
             "spaces",
             4
         ],
-        "interface-name": false,
+        "interface-name": [true, "never-prefix"],
         "jsdoc-format": true,
+        "max-line-length": false,
         "member-ordering": [true, {
             "order": [
                 "private-static-field",

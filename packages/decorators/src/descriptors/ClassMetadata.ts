@@ -2,7 +2,7 @@ import { ClassDescriptor } from './ClassDescriptor';
 import { ClassConstructor } from '../utils';
 import 'reflect-metadata';
 
-const METADATAKEY_CLASS: Symbol = Symbol('es-validation:class');
+const METADATAKEY_CLASS: symbol = Symbol('es-validation:class');
 const METADATAKEY_PARAMTYPES: string = 'design:paramtypes';
 const METADATAKEY_RETURNTYPE: string = 'design:returntype';
 const METADATAKEY_TYPE: string = 'design:type';

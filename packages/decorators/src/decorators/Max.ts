@@ -10,7 +10,7 @@ import {
  */
 function Max(maximum: number): ConstraintDecorator {
     return (target, propertyKey, descriptor) => addConstraint(target, propertyKey, descriptor, 'Max', {
-        maximum: maximum
+        maximum
     });
 }
 

@@ -11,7 +11,7 @@ import { ClassConstructor } from '../utils';
 /**
  * Constraint decorator
  */
-type ConstraintDecorator = <T>(target: Object|Function, propertyKey: string|symbol, descriptor?: TypedPropertyDescriptor<T>|number) => void;
+type ConstraintDecorator = <T>(target: object|Function, propertyKey: string|symbol, descriptor?: TypedPropertyDescriptor<T>|number) => void;
 
 /**
  * Throw an error if a decorator is applied to a static method parameter or a static property
