@@ -9,17 +9,20 @@ jobs:
           name: 'Version check'
           command: |
             node --version
-            npm --version
+            yarn --version
       - checkout
       - run:
+          name: 'Tools'
+          command: npm install -g lerna
+      - run:
           name: 'Dependencies'
-          command: npm install
+          command: yarn bootstrap
       - run:
           name: 'Lint'
-          command: npm run tslint
+          command: yarn quality:lint
       - run:
           name: 'Build'
-          command: npm run build
+          command: yarn build
       - run:
           name: 'Unit tests'
-          command: npm run coverage
+          command: yarn test:coverage
