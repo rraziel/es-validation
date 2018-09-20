@@ -5,14 +5,14 @@ import { ConstraintDescriptor } from '@es-validation/decorators';
  * Min constraint validator
  */
 class MinConstraintValidator extends AbstractNumericConstraintValidator {
-    private maximum!: number;
+    private minimum!: number;
 
     /**
      * Initialize the validator in preparation for isValid calls
      * @param constraintDescriptor Constraint descriptor
      */
     initialize(constraintDescriptor: ConstraintDescriptor): void {
-        this.maximum = constraintDescriptor.getAttribute<number>('maximum')!;
+        this.minimum = constraintDescriptor.getAttribute<number>('minimum')!;
     }
 
     /**
@@ -21,7 +21,7 @@ class MinConstraintValidator extends AbstractNumericConstraintValidator {
      * @return true if the value passes the constraint
      */
     protected isValidValue(value: number): boolean {
-        return value <= this.maximum;
+        return value >= this.minimum;
     }
 
 }

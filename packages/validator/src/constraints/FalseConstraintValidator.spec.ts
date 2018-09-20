@@ -1,20 +1,23 @@
 import { FalseConstraintValidator } from './FalseConstraintValidator';
 import { ConstraintValidator } from './ConstraintValidator';
 import { ConstraintValidationContext } from '../validation';
+import { ConstraintDescriptor } from '@es-validation/decorators';
 
 describe('False constraint validator', () => {
-    let emailConstraintValidator: ConstraintValidator<any>;
+    let falseConstraintValidator: ConstraintValidator<any>;
     let constraintValidationContext: ConstraintValidationContext;
+    let constraintDescriptor: jest.Mocked<ConstraintDescriptor> = {} as jest.Mocked<ConstraintDescriptor>;
 
     beforeEach(() => {
-        emailConstraintValidator = new FalseConstraintValidator();
+        falseConstraintValidator = new FalseConstraintValidator();
+        falseConstraintValidator.initialize(constraintDescriptor);
     });
 
     it('considers false boolean values to be valid', () => {
         // given
         let value: boolean = false;
         // when
-        let result: boolean = emailConstraintValidator.isValid(value, constraintValidationContext);
+        let result: boolean = falseConstraintValidator.isValid(value, constraintValidationContext);
         // then
         expect(result).toBe(true);
     });
@@ -23,7 +26,7 @@ describe('False constraint validator', () => {
         // given
         let value: boolean = true;
         // when
-        let result: boolean = emailConstraintValidator.isValid(value, constraintValidationContext);
+        let result: boolean = falseConstraintValidator.isValid(value, constraintValidationContext);
         // then
         expect(result).toBe(false);
     });
