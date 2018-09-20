@@ -3,14 +3,17 @@
         "class-name": true,
         "curly": true,
         "eofline": true,
-        "prefer-const": false,
         "indent": [true,
             "spaces",
             4
         ],
-        "interface-name": [true, "never-prefix"],
+        "interface-name": [true,
+            "never-prefix"
+        ],
         "jsdoc-format": true,
-        "max-line-length": false,
+        "max-line-length": [true,
+            250
+        ],
         "member-ordering": [true, {
             "order": [
                 "private-static-field",
@@ -48,6 +51,7 @@
             "check-open-brace",
             "check-whitespace"
         ],
+        "prefer-const": false,
         "quotemark": [true,
             "single",
             "avoid-escape",
