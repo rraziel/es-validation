@@ -3,6 +3,10 @@ import { ConstraintValidationContext, Validator, ValidatorOptions } from '../val
 import { ConstraintDescriptor } from '@es-validation/decorators';
 import { createMockInstance } from 'jest-create-mock-instance';
 
+ // NOTE: required due to jest-date-mock
+ declare var global: any;
+ global.Date = Object.getPrototypeOf(new Date()).constructor;
+ 
 class AbstractMockedConstraintValidator<T> extends AbstractConstraintValidator<T> {
     isValidValue!: jest.Mock<(testedValue: T) => boolean>;
 }
@@ -173,6 +177,80 @@ describe('Abstract constraint validator', () => {
         it('rejects booleans', () => {
             // given
             let value: boolean = true;
+            // when
+            let result: boolean = abstractConstraintValidator.isValid(value, constraintValidationContext);
+            // then
+            expect(result).toBe(false);
+            expect(abstractConstraintValidator.isValidValue).toHaveBeenCalledTimes(0);
+        });
+
+    });
+
+    describe('can filter dates', () => {
+
+        beforeEach(() => {
+            abstractConstraintValidator = new AbstractMockedConstraintValidator(Date);
+            abstractConstraintValidator.isValidValue = jest.fn<(testedValue: Date) => boolean>();
+            abstractConstraintValidator.isValidValue.mockReturnValueOnce(true);
+            abstractConstraintValidator.initialize(constraintDescriptor);
+        });
+
+        it('accepts dates', () => {
+            // given
+            let value: Date = new Date();
+            // when
+            let result: boolean = abstractConstraintValidator.isValid(value, constraintValidationContext);
+            // then
+            expect(result).toBe(true);
+            expect(abstractConstraintValidator.isValidValue).toHaveBeenCalledTimes(1);
+            expect(abstractConstraintValidator.isValidValue).toHaveBeenCalledWith(value, constraintValidationContext);
+        });
+
+        it('rejects strings by default', () => {
+            // given
+            let value: string = '2018-09-20T07:12:14Z';
+            // when
+            let result: boolean = abstractConstraintValidator.isValid(value, constraintValidationContext);
+            // then
+            expect(result).toBe(false);
+            expect(abstractConstraintValidator.isValidValue).toHaveBeenCalledTimes(0);
+        });
+
+        it('accepts strings when allowed', () => {
+            // given
+            let value: string = '2018-09-20T07:12:14Z';
+            validatorOptions.stringAsDate = true;
+            // when
+            let result: boolean = abstractConstraintValidator.isValid(value, constraintValidationContext);
+            // then
+            expect(result).toBe(true);
+            expect(abstractConstraintValidator.isValidValue).toHaveBeenCalledTimes(1);
+            expect(abstractConstraintValidator.isValidValue).toHaveBeenCalledWith(new Date('2018-09-20T07:12:14Z'), constraintValidationContext);
+        });
+
+        it('rejects numbers', () => {
+            // given
+            let value: number = 123;
+            // when
+            let result: boolean = abstractConstraintValidator.isValid(value, constraintValidationContext);
+            // then
+            expect(result).toBe(false);
+            expect(abstractConstraintValidator.isValidValue).toHaveBeenCalledTimes(0);
+        });
+
+        it('rejects booleans', () => {
+            // given
+            let value: boolean = true;
+            // when
+            let result: boolean = abstractConstraintValidator.isValid(value, constraintValidationContext);
+            // then
+            expect(result).toBe(false);
+            expect(abstractConstraintValidator.isValidValue).toHaveBeenCalledTimes(0);
+        });
+
+        it('rejects objects', () => {
+            // given
+            let value: any = {};
             // when
             let result: boolean = abstractConstraintValidator.isValid(value, constraintValidationContext);
             // then
