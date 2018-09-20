@@ -10,7 +10,7 @@ describe('NotNull constraint validator', () => {
         notNullConstraintValidator = new NotNullConstraintValidator<any>();
     });
 
-    it('treats non-null values as valid', () => {
+    it('considers non-null values to be valid', () => {
         // given
         let value: any = 5;
         // when
@@ -19,7 +19,7 @@ describe('NotNull constraint validator', () => {
         expect(result).toBe(true);
     });
 
-    it('treats null values as invalid', () => {
+    it('considers null values to be invalid', () => {
         // given
         let value: any = null;
         // when
