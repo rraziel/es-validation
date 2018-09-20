@@ -13,7 +13,7 @@ jobs:
       - checkout
       - run:
           name: 'Tools'
-          command: npm install -g lerna
+          command: sudo npm install -g lerna
       - run:
           name: 'Dependencies'
           command: yarn bootstrap
