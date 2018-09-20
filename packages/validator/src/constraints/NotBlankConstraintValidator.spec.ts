@@ -2,7 +2,7 @@ import { NotBlankConstraintValidator } from './NotBlankConstraintValidator';
 import { ConstraintValidator } from './ConstraintValidator';
 import { ConstraintValidationContext } from '../validation';
 
-describe('NotNull constraint validator', () => {
+describe('NotBlank constraint validator', () => {
     let notBlankConstraintValidator: ConstraintValidator<any>;
     let constraintValidationContext: ConstraintValidationContext;
 
