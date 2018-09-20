@@ -9,7 +9,7 @@ import {
  * @param maximum Maximum
  * @return Size decorator
  */
-function Size(minimum: number = 0, maximum = Number.MAX_SAFE_INTEGER): ConstraintDecorator {
+function Size(minimum: number = 0, maximum: number = Number.MAX_SAFE_INTEGER): ConstraintDecorator {
     return (target, propertyKey, descriptor) => addConstraint(target, propertyKey, descriptor, 'Size', {
         mininum: minimum,
         maximum: maximum

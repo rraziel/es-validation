@@ -1,20 +1,22 @@
 environment:
-  version_nodejs: "8"
+  version_nodejs: "10"
 install:
   - ps: Install-Product node $env:version_nodejs x64
-  - npm install
+  - ps: $env:package_version = (Get-Content -Raw -Path package.json | ConvertFrom-Json).version
+  - ps: Update-AppveyorBuild -Version "$env:package_version-$env:APPVEYOR_BUILD_NUMBER"
+  - npm install -g lerna
+  - yarn bootstrap
 test_script:
   - node --version
-  - npm --version
-  - npm run tslint
-  - npm run build
-  - npm run coverage
+  - yarn --version
+  - yarn quality:lint
+  - yarn build
+  - yarn test:coverage
 on_finish:
   - ps: (new-object net.webclient).UploadFile("https://ci.appveyor.com/api/testresults/junit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path .\test-report.xml))
 on_success:
   - ./node_modules/.bin/codecov
 build: off
-version: "0.1.0-build.{build}"
 branches:
   only:
     - master

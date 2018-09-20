@@ -6,7 +6,7 @@ import { ConstraintDescriptor } from '@es-validation/decorators';
  * @param <T> Value type
  */
 class ConstraintConstraintValidator<T> implements ConstraintValidator<T> {
-    private constraintValidator!: <T>(value: T) => boolean;
+    private constraintValidator!: (value: T) => boolean;
 
     /**
      * Initialize the validator in preparation for isValid calls
