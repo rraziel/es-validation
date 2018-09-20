@@ -1,6 +1,6 @@
-build/
 coverage/
-dist/
+lib/
+bin/
 node_modules/
 test-report.xml
-
+*.log

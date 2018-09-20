@@ -1,56 +1,66 @@
 {
-  "name": "es-validation",
-  "version": "0.1.0",
-  "description": "ECMAScript decorators for validation, inspired by JSR-303, JSR-349 and JSR-380.",
-  "homepage": "https://github.com/rraziel/es-validation",
-  "bugs": "https://github.com/rraziel/es-validation/issues",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/rraziel/es-validation.git"
-  },
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
-    "build": "tsc -p .",
-    "watch": "tsc --watch -p .",
-    "test": "./node_modules/.bin/jest --watch --no-cache --verbose",
-    "coverage": "./node_modules/.bin/jest --no-cache --coverage",
-    "tslint": "tslint --project ./tsconfig.json --config ./conf/tslint.json"
+    "bootstrap": "lerna bootstrap",
+    "build": "tsc --build packages",
+    "watch": "tsc --build packages --watch",
+    "quality:lint": "tslint --project ./packages/tsconfig.lint.json --config ./packages/tslint.json",
+    "test": "jest --no-cache --verbose",
+    "test:coverage": "jest --no-cache --coverage",
+    "test:watch": "jest --watch --no-cache --verbose"
   },
   "jest": {
-    "mapCoverage": true,
     "collectCoverageFrom": [
-      "src/**/*.ts",
-      "!src/**/index.ts"
+      "packages/*/src/**/*.ts",
+      "!packages/*/src/**/index.ts"
+    ],
+    "globals": {
+      "ts-jest": {
+        "diagnostics": true,
+        "tsConfig": "<rootDir>/packages/tsconfig.test.json"
+      }
+    },
+    "moduleDirectories": [
+      "node_modules",
+      "src"
     ],
     "moduleFileExtensions": [
       "ts",
       "js",
       "json"
     ],
+    "moduleNameMapper": {
+      "@es-validation/(.+)": "<rootDir>/node_modules/@es-validation/$1/src/index.ts"
+    },
     "roots": [
-      "<rootDir>/src"
+      "<rootDir>/packages"
+    ],
+    "setupFiles": [
+      "jest-date-mock"
     ],
     "testResultsProcessor": "<rootDir>/node_modules/jest-junit-reporter",
-    "testRegex": "\\.spec\\.ts",
+    "testRegex": "\\.spec\\.ts", 
     "transform": {
       "^.+\\.ts$": "ts-jest"
     }
   },
-  "dependencies": {
-    "reflect-metadata": "0.1.12"
-  },
   "devDependencies": {
-    "@types/jest": "23.3.1",
+    "@types/jest": "23.3.2",
+    "babel-core": "6.26.3",
+    "babel-jest": "23.6.0",
     "codecov": "3.0.4",
-    "jest": "22.4.0",
+    "jest": "23.6.0",
     "jest-create-mock-instance": "1.1.0",
+    "jest-date-mock": "1.0.5",
     "jest-junit-reporter": "1.1.0",
-    "json-loader": "0.5.7",
-    "ts-jest": "23.1.4",
+    "lerna": "3.4.0",
+    "reflect-metadata": "0.1.12",
+    "ts-jest": "23.10.0",
     "ts-node": "7.0.1",
-    "tslint": "5.9.1",
-    "typescript": "2.7.2"
+    "tslint": "5.11.0",
+    "typescript": "3.0.3"
   }
 }

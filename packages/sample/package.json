@@ -1,0 +1,14 @@
+{
+  "name": "@es-validation/sample",
+  "description": "Sample es-validation code.",
+  "version": "0.1.0",
+  "private": true,
+  "repository": "https://github.com/rraziel/es-validation/tree/master/packages/sample",
+  "license": "MIT",
+  "main": "./bin/index.js",
+  "types": "./bin/index.d.ts",
+  "dependencies": {
+    "@es-validation/decorators": "0.1.0",
+    "@es-validation/validator": "0.1.0"
+  }
+}

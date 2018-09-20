@@ -1,0 +1,12 @@
+{
+  "name": "@es-validation/decorators",
+  "description": "ECMAScript decorators for validation, inspired by JSR-303, JSR-349 and JSR-380.",
+  "version": "0.1.0",
+  "repository": "https://github.com/rraziel/es-validation/tree/master/packages/decorators",
+  "license": "MIT",
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "dependencies": {
+    "reflect-metadata": "0.1.12"
+  }
+}

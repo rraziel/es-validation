@@ -1,0 +1,12 @@
+{
+  "name": "@es-validation/validator",
+  "description": "Validators for es-validation decorators.",
+  "version": "0.1.0",
+  "repository": "https://github.com/rraziel/es-validation/tree/master/packages/validator",
+  "license": "MIT",
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "dependencies": {
+    "@es-validation/decorators": "0.1.0"
+  }
+}

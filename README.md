@@ -1,19 +1,24 @@
 # es-validation
 
-[![AppVeyor](https://img.shields.io/appveyor/ci/rraziel/es-validation/master.svg?label=Win32&style=flat)](https://ci.appveyor.com/project/rraziel/es-validation)
-[![CircleCI](https://img.shields.io/circleci/project/github/rraziel/es-validation/master.svg?label=MacOS&style=flat)](https://circleci.com/gh/rraziel/es-validation)
-[![Travis CI](https://img.shields.io/travis/rraziel/es-validation/master.svg?label=Linux&style=flat)](https://travis-ci.org/rraziel/es-validation)
-[![AppVeyor tests](https://img.shields.io/appveyor/tests/rraziel/es-validation/master.svg?label=Tests&style=flat)](https://ci.appveyor.com/project/rraziel/es-validation/build/tests)
-[![Codecov](https://img.shields.io/codecov/c/github/rraziel/es-validation.svg?label=Coverage&style=flat)](https://codecov.io/gh/rraziel/es-validation)
-[![Code Climate](https://img.shields.io/codeclimate/maintainability/rraziel/es-validation.svg?label=Maintainability&style=flat)](https://codeclimate.com/github/rraziel/es-validation)
-[![Code Climate](https://img.shields.io/codeclimate/issues/rraziel/es-validation.svg?label=Code%20Issues&style=flat)](https://codeclimate.com/github/rraziel/es-validation/issues)
+[![Version](https://img.shields.io/npm/v/@es-validation/decorators.svg?maxAge=2592000&label=Version&style=for-the-badge&logo=npm)](https://www.npmjs.com/package/@es-validation/decorators)
+[![Downloads](https://img.shields.io/npm/dt/@es-validation/decorators.svg?maxAge=2592000&label=Downloads&style=for-the-badge&logo=npm)](https://www.npmjs.com/package/@es-validation/decorators)
 
-[![Dependencies](https://img.shields.io/david/rraziel/es-validation.svg?label=Dependencies&style=flat)](https://david-dm.org/rraziel/es-validation)
-[![Development dependencies](https://img.shields.io/david/dev/rraziel/es-validation.svg?label=Dev%20Dependencies&style=flat)](https://david-dm.org/rraziel/es-validation?type=dev)
-[![Known Vulnerabilities](https://snyk.io/test/github/rraziel/es-validation/badge.svg)](https://snyk.io/test/github/rraziel/es-validation)
-[![Greenkeeper](https://badges.greenkeeper.io/rraziel/es-validation.svg)](https://greenkeeper.io/)
+[![AppVeyor tests](https://img.shields.io/appveyor/tests/rraziel/es-validation/master.svg?label=Tests&style=for-the-badge)](https://ci.appveyor.com/project/rraziel/es-validation/build/tests)
+[![Codecov](https://img.shields.io/codecov/c/github/rraziel/es-validation.svg?label=Coverage&style=for-the-badge)](https://codecov.io/gh/rraziel/es-validation)
+[![Code Climate](https://img.shields.io/codeclimate/maintainability/rraziel/es-validation.svg?label=Maintainability&style=for-the-badge)](https://codeclimate.com/github/rraziel/es-validation)
+[![Code Climate](https://img.shields.io/codeclimate/issues/rraziel/es-validation.svg?label=Code%20Issues&style=for-the-badge)](https://codeclimate.com/github/rraziel/es-validation/issues)
 
 A set of constraint validation decorators inspired by [JSR-303](http://beanvalidation.org/1.0/), [JSR-349](http://beanvalidation.org/1.1/) and [JSR-380](http://beanvalidation.org/2.0/).
+
+- [Introduction](#introduction)
+- [Getting Started](#getting-started)
+- [Decorators](#decorators)
+- [Validation](#validation)
+  - [Validator](#validator)
+  - [Date Provider](#date-provider)
+- [Development](#development)
+
+## Introduction
 
 The library makes it possible to:
 
@@ -21,65 +26,67 @@ The library makes it possible to:
 - define constraints on parameters
 - define constraints on returned values
 
+For a complete description, refer to the [documentation](doc/README.md).
+
+A [sample project](packages/sample) is also available.
+
 ## Getting Started
 
-The library can be installed using `npm`:
+The modules can be installed using `npm`:
 
 ```
-npm install es-validation --save
+npm install @es-validation/decorators @es-validation/validator --save
 ```
 
 Or using `yarn`:
 
 ```
-yarn add es-validation
+yarn add @es-validation/decorators @es-validation/validator
 ```
 
 ## Decorators
 
-A number of decorators are available, and can be used on properties, parameters or functions. In the later case, the constraint is placed on the method's returned values.
+A number of decorators are available, and can be used on properties, parameters or functions. In the later case, the constraint applies to the returned values.
 
-`String` elements are converted to `Boolean`, `Number` or `Date`, depending on what type the constraint normally applies to. When relevant, `Object` elements are converted as well through `toString()`.
+| Name                 | Boolean | Number | String | Date | Container | Object | Description                                                   |
+|:---------------------|:--------|:-------|:-------|:-----|:----------|:-------|:--------------------------------------------------------------|
+| `@Constraint`        | ✔️      | ✔️    | ✔️     | ✔️  | ✔️        | ✔️    | Must comply to an arbitrary user-defined constraint.          |
+| `@Defined`           | ✔️      | ✔️    | ✔️     | ✔️  | ✔️        | ✔️    | Must not be `undefined`.                                      |
+| `@ElementConstraint` | ❌      | ❌    | ❌     | ❌  | ✔️        | ❌    | List constraints applied to container elements.               |
+| `@Undefined`         | ✔️      | ✔️    | ✔️     | ✔️  | ✔️        | ✔️    | Must be `undefined`.                                          |
+| `@NotNull`           | ✔️      | ✔️    | ✔️     | ✔️  | ✔️        | ✔️    | Must not be `null`.                                           |
+| `@Null`              | ✔️      | ✔️    | ✔️     | ✔️  | ✔️        | ✔️    | Must be `null`.                                               |
+| `@True`              | ✔️      | ❌    | ❌     | ❌  | ❌        | ❌    | Must be `true`.                                               |
+| `@False`             | ✔️      | ❌    | ❌     | ❌  | ❌        | ❌    | Must be `false`.                                              |
+| `@NotBlank`          | ❌      | ❌    | ✔️     | ❌  | ❌        | ❌    | Must contain at least one non-space character.                |
+| `@NotEmpty`          | ❌      | ❌    | ✔️     | ❌  | ✔️        | ❌    | Must not be empty.                                            |
+| `@Size()`            | ❌      | ❌    | ✔️     | ❌  | ✔️        | ❌    | Must be within a size range.                                  |
+| `@Pattern()`         | ❌      | ❌    | ✔️     | ❌  | ❌        | ❌    | Must match a regular expression.                              |
+| `@Max()`             | ❌      | ✔️    | ✔️¹    | ❌  | ❌        | ❌    | Must be a number that is lower than or equal to a maximum.    |
+| `@Min()`             | ❌      | ✔️    | ✔️¹    | ❌  | ❌        | ❌    | Must be a number that is higher than or equal to a minimum.   |
+| `@PositiveOrZero`    | ❌      | ✔️    | ✔️¹    | ❌  | ❌        | ❌    | Must be a number that is higher than or equal to `0`.         |
+| `@Positive`          | ❌      | ✔️    | ✔️¹    | ❌  | ❌        | ❌    | Must be a number that is higher than `0`.                     |
+| `@NegativeOrZero`    | ❌      | ✔️    |️ ✔️¹    | ❌  | ❌        | ❌    | Must be a number that is lower than or equal to `0`.          |
+| `@Negative`          | ❌      | ✔️    | ✔️¹    | ❌  | ❌        | ❌    | Must be a number that is lower than `0`.                      |
+| `@Digits()`          | ❌      | ✔️    | ✔️¹    | ❌  | ❌        | ❌    | Must be a number with limited integral and fractional digits. |
+| `@FutureOrPresent`   | ❌      | ❌    | ✔️²    | ✔️  | ❌        | ❌    | Must be a date set in the future or now.                      |
+| `@Future`            | ❌      | ❌    | ✔️²    | ✔️  | ❌        | ❌    | Must be a date set in the future.                             |
+| `@PastOrPresent`     | ❌      | ❌    | ✔️²    | ✔️  | ❌        | ❌    | Must be a date set in the past or now.                        |
+| `@Past`              | ❌      | ❌    | ✔️²    | ✔️  | ❌        | ❌    | Must be a date set in the past.                               |
+| `@Email`             | ❌      | ❌    | ✔️     | ❌  | ❌        | ❌    | Must be a valid email address.                                |
+| `@Valid`             | ❌      | ❌    | ❌     | ❌  | ✔️        | ✔️    | Properties must be validated.                                 |
 
-| Name               | Boolean            | Number             | String             | Date               | Map/Array          | Description                                                            |
-|:-------------------|:-------------------|:-------------------|:-------------------|:-------------------|:-------------------|:-----------------------------------------------------------------------|
-| `@AssertFalse`     | :heavy_check_mark: | -                  | :heavy_check_mark: | -                  | -                  | Must be `false`.                                                       |
-| `@AssertTrue`      | :heavy_check_mark: | -                  | :heavy_check_mark: | -                  | -                  | Must be `true`.                                                        |
-| `@NotNull`         | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | Must not be `null`.                                                    |
-| `@Null`            | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | Must be `null`.                                                        |
-| `@NotBlank`        | -                  | -                  | :heavy_check_mark: | -                  | -                  | Must not be `null` and contain at least one non-space character.       |
-| `@NotEmpty`        | -                  | -                  | :heavy_check_mark: | -                  | :heavy_check_mark: | Must not be empty (string length, array/map size).                     |
-| `@Size()`          | -                  | -                  | :heavy_check_mark: | -                  | :heavy_check_mark: | Must be within a size range (string length, array/map size).           |
-| `@Pattern()`       | -                  | -                  | :heavy_check_mark: | -                  | -                  | Must match a regular expression.                                       |
-| `@Max()`           | -                  | :heavy_check_mark: | :heavy_check_mark: | -                  | -                  | Must be a number that is lower than or equal to a maximum.             |
-| `@Min()`           | -                  | :heavy_check_mark: | :heavy_check_mark: | -                  | -                  | Must be a number that is higher than or equal to a minimum.            |
-| `@PositiveOrZero`  | -                  | :heavy_check_mark: | :heavy_check_mark: | -                  | -                  | Must be a number that is higher than or equal to `0`.                  |
-| `@Positive`        | -                  | :heavy_check_mark: | :heavy_check_mark: | -                  | -                  | Must be a number that is higher than `0`.                              |
-| `@NegativeOrZero`  | -                  | :heavy_check_mark: | :heavy_check_mark: | -                  | -                  | Must be a number that is lower than or equal to `0`.                   |
-| `@Negative`        | -                  | :heavy_check_mark: | :heavy_check_mark: | -                  | -                  | Must be a number that is lower than `0`.                               |
-| `@Digits()`        | -                  | :heavy_check_mark: | :heavy_check_mark: | -                  | -                  | Must be a number with a set maximum of integral and fractional digits. |
-| `@FutureOrPresent` | -                  | -                  | :heavy_check_mark: | :heavy_check_mark: | -                  | Must be a date set in the future or now.                               |
-| `@Future`          | -                  | -                  | :heavy_check_mark: | :heavy_check_mark: | -                  | Must be a date set in the future.                                      |
-| `@PastOrPresent`   | -                  | -                  | :heavy_check_mark: | :heavy_check_mark: | -                  | Must be a date set in the past or now.                                 |
-| `@Past`            | -                  | -                  | :heavy_check_mark: | :heavy_check_mark: | -                  | Must be a date set in the past.                                        |
-| `@Email`           | -                  | -                  | :heavy_check_mark: | -                  | -                  | Must be a valid email address.                                         |
-| `@Valid`           | -                  | -                  | -                  | -                  | :heavy_check_mark: | Properties must be validated (also applies to `Object`).               |
+¹ Strings are validated as base-10 numbers when the validator is configured with `stringAsNumber` (disabled by default)
+
+² Strings are validated as ISO-8601 datetimes when the validator is configured with `stringAsDate` (disabled by default)
 
 ## Validation
 
-The module only provides an interface for validation, but no actual implementation. The implementation must be defined within a separate module.
-
-The following known implementations are available:
-
-- [es-validation-validator](https://github.com/rraziel/es-validation-validator) (reference implementation)
-
-### Validator Factory
-
-The `ValidatorFactory` interface is the entry-point for user code to obtain validator instances, mainly through the `getValidator()` method.
+The `@es-validation/validator` module provides validation based on the `@es-validation/decorators` decorators.
 
 ### Validator
 
-The `Validator` interface is used to perform constraint validation. The following methods are available:
+The `Validator` class is used to perform constraint validation. The following validation methods are available:
 
 | Method                  | Description                              |
 |:------------------------|:-----------------------------------------|
@@ -88,8 +95,6 @@ The `Validator` interface is used to perform constraint validation. The followin
 | `validateValue()`       | Validate a value.                        |
 | `validateParameters()`  | Validate a function call's parameters.   |
 | `validateReturnValue()` | Validate a function call's return value. |
-
-A `Validator` instance is obtained through a `ValidatorFactory`.
 
 ### Date Provider
 
@@ -103,14 +108,26 @@ There is generally no interaction with this interface from user code, unless new
 
 ## Development
 
-The module can be built using the following command:
+[![AppVeyor](https://img.shields.io/appveyor/ci/rraziel/es-validation/master.svg?label=Win32&style=for-the-badge&logo=appveyor)](https://ci.appveyor.com/project/rraziel/es-validation)
+[![CircleCI](https://img.shields.io/circleci/project/github/rraziel/es-validation/master.svg?label=MacOS&style=for-the-badge&logo=circleci)](https://circleci.com/gh/rraziel/es-validation)
+[![Travis CI](https://img.shields.io/travis/rraziel/es-validation/master.svg?label=Linux&style=for-the-badge&logo=travis)](https://travis-ci.org/rraziel/es-validation)
+
+The project requires `lerna` and `yarn` to be available globally.
+
+Bootstrap the project:
 
 ```
-npm run build
+yarn bootstrap
 ```
 
-It is also possible to keep unit tests executing as a background task:
+Build the project:
 
 ```
-npm run test
+yarn build
+```
+
+Execute all tests:
+
+```
+yarn test
 ```
