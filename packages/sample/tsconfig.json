@@ -1,0 +1,15 @@
+{
+    "extends": "../tsconfig.base.json",
+    "compilerOptions": {
+        "outDir": "./bin",
+        "rootDir": "./src"
+    },
+    "exclude": [
+        "./bin",
+        "**/*.spec.*"
+    ],
+    "references": [
+        {"path": "../decorators"},
+        {"path": "../validator"}
+    ]
+}
