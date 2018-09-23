@@ -41,6 +41,7 @@
     "setupFiles": [
       "jest-date-mock"
     ],
+    "testEnvironment": "node",
     "testResultsProcessor": "<rootDir>/node_modules/jest-junit-reporter",
     "testRegex": "\\.spec\\.ts",
     "transform": {
