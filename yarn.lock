@@ -2745,9 +2745,9 @@ jest-create-mock-instance@1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/jest-create-mock-instance/-/jest-create-mock-instance-1.1.0.tgz#b69e97a4dad34ccebf180424a178217513644d2f"
 
-jest-date-mock@1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/jest-date-mock/-/jest-date-mock-1.0.5.tgz#b9a5ece8908338cac5ba1faec882e53aabbc7e9b"
+jest-date-mock@1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/jest-date-mock/-/jest-date-mock-1.0.6.tgz#7ea405d1fa68f86bb727d12e47b9c5e6760066a6"
 
 jest-diff@^23.6.0:
   version "23.6.0"
