@@ -25,4 +25,4 @@ jobs:
           command: yarn build
       - run:
           name: 'Unit tests'
-          command: yarn test:coverage
+          command: yarn test:coverage --maxWorkers=2
