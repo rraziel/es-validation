@@ -9,7 +9,7 @@ import {
 const TestDecorator: ConstraintDecorator = <T>(target, propertyKey, descriptor) => addConstraint(new ConstraintProperties<T>(target, propertyKey, descriptor, 'TestDecorator'));
 
 const TestDecoratorWithExplicitName: ConstraintDecorator = <T>(target, propertyKey, descriptor) => {
-    let constraintProperties: ConstraintProperties<T> = new ConstraintProperties<T>(target, propertyKey, descriptor, 'TestDecorator');
+    const constraintProperties: ConstraintProperties<T> = new ConstraintProperties<T>(target, propertyKey, descriptor, 'TestDecorator');
     constraintProperties.decoratorName = 'TestDecoratorName';
     addConstraint(constraintProperties);
 };
@@ -24,7 +24,7 @@ describe('Constraint decorators', () => {
                 @TestDecorator property?: number;
             }
             // when
-            let classDescriptor: ClassDescriptor<TestClass>|undefined = loadClassDescriptor(TestClass);
+            const classDescriptor: ClassDescriptor<TestClass>|undefined = loadClassDescriptor(TestClass);
             // then
             expect(classDescriptor).toBeDefined();
             expect(classDescriptor!.getPropertyDescriptor('property')).toBeDefined();
@@ -40,7 +40,7 @@ describe('Constraint decorators', () => {
                 constructor(@TestDecorator p: number) { /* empty */ }
             }
             // when
-            let classDescriptor: ClassDescriptor<TestClass>|undefined = loadClassDescriptor(TestClass);
+            const classDescriptor: ClassDescriptor<TestClass>|undefined = loadClassDescriptor(TestClass);
             // then
             expect(classDescriptor).toBeDefined();
             expect(classDescriptor!.getConstructorDescriptor()).toBeDefined();

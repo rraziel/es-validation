@@ -1,32 +1,30 @@
 import { FalseConstraintValidator } from './FalseConstraintValidator';
 import { ConstraintValidator } from './ConstraintValidator';
 import { ConstraintValidationContext } from '../validation';
-import { ConstraintDescriptor } from '@es-validation/decorators';
+import { createMockInstance } from 'jest-create-mock-instance';
 
 describe('False constraint validator', () => {
+    const constraintValidationContext: ConstraintValidationContext = createMockInstance(ConstraintValidationContext as any);
     let falseConstraintValidator: ConstraintValidator<any>;
-    let constraintValidationContext: ConstraintValidationContext;
-    let constraintDescriptor: jest.Mocked<ConstraintDescriptor> = {} as jest.Mocked<ConstraintDescriptor>;
 
     beforeEach(() => {
         falseConstraintValidator = new FalseConstraintValidator();
-        falseConstraintValidator.initialize(constraintDescriptor);
     });
 
     it('considers false boolean values to be valid', () => {
         // given
-        let value: boolean = false;
+        const value: boolean = false;
         // when
-        let result: boolean = falseConstraintValidator.isValid(value, constraintValidationContext);
+        const result: boolean = falseConstraintValidator.isValid(value, constraintValidationContext);
         // then
         expect(result).toBe(true);
     });
 
     it('considers true boolean values to be invalid', () => {
         // given
-        let value: boolean = true;
+        const value: boolean = true;
         // when
-        let result: boolean = falseConstraintValidator.isValid(value, constraintValidationContext);
+        const result: boolean = falseConstraintValidator.isValid(value, constraintValidationContext);
         // then
         expect(result).toBe(false);
     });

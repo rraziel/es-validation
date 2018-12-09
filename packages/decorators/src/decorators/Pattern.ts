@@ -9,7 +9,7 @@ import { ConstraintProperties } from './ConstraintProperties';
  */
 function Pattern(regExp: RegExp): ConstraintDecorator {
     return <T>(target, propertyKey, descriptor) => {
-        let constraintProperties: ConstraintProperties<T> = new ConstraintProperties<T>(target, propertyKey, descriptor, 'Pattern');
+        const constraintProperties: ConstraintProperties<T> = new ConstraintProperties<T>(target, propertyKey, descriptor, 'Pattern');
 
         constraintProperties.attributes = {
             regExp: regExp

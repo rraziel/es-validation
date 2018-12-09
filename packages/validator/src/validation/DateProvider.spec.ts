@@ -12,7 +12,7 @@ describe('Date provider', () => {
         // given
         advanceTo(12345678);
         // when
-        let now: Date = dateProvider.getDate();
+        const now: Date = dateProvider.getDate();
         // then
         expect(now.getTime()).toBe(12345678);
     });

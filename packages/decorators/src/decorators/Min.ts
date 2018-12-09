@@ -9,7 +9,7 @@ import { ConstraintProperties } from './ConstraintProperties';
  */
 function Min(minimum: number): ConstraintDecorator {
     return <T>(target, propertyKey, descriptor) => {
-        let constraintProperties: ConstraintProperties<T> = new ConstraintProperties<T>(target, propertyKey, descriptor, 'Min');
+        const constraintProperties: ConstraintProperties<T> = new ConstraintProperties<T>(target, propertyKey, descriptor, 'Min');
 
         constraintProperties.attributes = {
             minimum

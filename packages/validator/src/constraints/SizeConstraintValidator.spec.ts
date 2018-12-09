@@ -2,14 +2,14 @@ import { SizeConstraintValidator } from './SizeConstraintValidator';
 import { ConstraintValidator } from './ConstraintValidator';
 import { ConstraintValidationContext } from '../validation';
 import { ConstraintDescriptor } from '@es-validation/decorators';
+import { createMockInstance } from 'jest-create-mock-instance';
 
 describe('Size constraint validator', () => {
+    const constraintValidationContext: ConstraintValidationContext = createMockInstance(ConstraintValidationContext as any);
+    const constraintDescriptor: jest.Mocked<ConstraintDescriptor> = {} as jest.Mocked<ConstraintDescriptor>;
     let sizeConstraintValidator: ConstraintValidator<any>;
-    let constraintValidationContext: ConstraintValidationContext;
-    let constraintDescriptor: jest.Mocked<ConstraintDescriptor> = {} as jest.Mocked<ConstraintDescriptor>;
 
     beforeEach(() => {
-        sizeConstraintValidator = new SizeConstraintValidator();
         constraintDescriptor.getAttribute = jest.fn<(constraintName: string) => any>();
         constraintDescriptor.getAttribute.mockImplementation((constraintName: string) => {
             switch (constraintName) {
@@ -17,27 +17,27 @@ describe('Size constraint validator', () => {
                 return 2;
             case 'maximum':
                 return 5;
+            default:
+                throw new Error(`unknown size constraint name ${constraintName}`);
             }
-
-            return undefined;
         });
-        sizeConstraintValidator.initialize(constraintDescriptor);
+        sizeConstraintValidator = new SizeConstraintValidator(constraintDescriptor);
     });
 
     it('considers containers with a size within range to be valid', () => {
         // given
-        let value: Array<number> = [1, 2, 3];
+        const value: Array<number> = [1, 2, 3];
         // when
-        let result: boolean = sizeConstraintValidator.isValid(value, constraintValidationContext);
+        const result: boolean = sizeConstraintValidator.isValid(value, constraintValidationContext);
         // then
         expect(result).toBe(true);
     });
 
     it('considers containers with a size outside of range to be invalid', () => {
         // given
-        let value: Array<number> = [1];
+        const value: Array<number> = [1];
         // when
-        let result: boolean = sizeConstraintValidator.isValid(value, constraintValidationContext);
+        const result: boolean = sizeConstraintValidator.isValid(value, constraintValidationContext);
         // then
         expect(result).toBe(false);
     });

@@ -17,12 +17,12 @@ interface ConstraintDescriptor {
     getAttributes(): Map<string, any>;
 
     /**
-     * Get a constraint attribute
+     * Get a constraint attribute, throwing an error if the attribute name is not recognized
      * @param attributeName Attribute name
      * @param <T>           Attribute value type
      * @return Attribute value
      */
-    getAttribute<T>(attributeName: string): T|undefined;
+    getAttribute<T>(attributeName: string): T;
 
 }
 

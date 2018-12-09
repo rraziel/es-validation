@@ -6,14 +6,14 @@ import { ConstraintDescriptor } from '@es-validation/decorators';
  * @param <T> Value type
  */
 class ConstraintConstraintValidator<T> implements ConstraintValidator<T> {
-    private constraintValidator!: (value: T) => boolean;
+    private readonly constraintValidator: (value: T) => boolean;
 
     /**
-     * Initialize the validator in preparation for isValid calls
+     * Class constructor
      * @param constraintDescriptor Constraint descriptor
      */
-    initialize(constraintDescriptor: ConstraintDescriptor): void {
-        this.constraintValidator = constraintDescriptor.getAttribute<(value: any) => boolean>('validator')!;
+    constructor(constraintDescriptor: ConstraintDescriptor) {
+        this.constraintValidator = constraintDescriptor.getAttribute<(value: any) => boolean>('validator');
     }
 
     /**

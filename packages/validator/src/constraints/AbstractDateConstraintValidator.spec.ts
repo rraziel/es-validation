@@ -1,6 +1,5 @@
 import { AbstractDateConstraintValidator } from './AbstractDateConstraintValidator';
 import { ConstraintValidationContext, DateProvider, Validator, ValidatorOptions } from '../validation';
-import { ConstraintDescriptor } from '@es-validation/decorators';
 import { createMockInstance } from 'jest-create-mock-instance';
 
  // NOTE: required due to jest-date-mock
@@ -14,7 +13,6 @@ class MockedDateConstraintValidator extends AbstractDateConstraintValidator {
 describe('Abstract date constraint validator', () => {
     let abstractDateConstraintValidator: MockedDateConstraintValidator;
     let constraintValidationContext: jest.Mocked<ConstraintValidationContext>;
-    let constraintDescriptor: ConstraintDescriptor;
     let validatorOptions: ValidatorOptions;
     let dateProvider: jest.Mocked<DateProvider>;
     let validator: jest.Mocked<Validator>;
@@ -35,12 +33,11 @@ describe('Abstract date constraint validator', () => {
 
     it('receives a date and the current time', () => {
         // given
-        let value: Date = new Date('2018-09-20T07:32:00Z');
-        let now: Date = new Date('2018-09-20T07:35:21Z');
-        abstractDateConstraintValidator.initialize(constraintDescriptor);
+        const value: Date = new Date('2018-09-20T07:32:00Z');
+        const now: Date = new Date('2018-09-20T07:35:21Z');
         dateProvider.getDate.mockReturnValueOnce(now);
         // when
-        let result: boolean = abstractDateConstraintValidator.isValid(value, constraintValidationContext);
+        const result: boolean = abstractDateConstraintValidator.isValid(value, constraintValidationContext);
         // then
         expect(result).toBe(true);
         expect(abstractDateConstraintValidator.isValidDate).toHaveBeenCalledTimes(1);

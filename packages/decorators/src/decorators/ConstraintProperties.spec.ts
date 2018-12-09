@@ -7,9 +7,9 @@ describe('Constraint properties', () => {
 
         it('a constructor parameter', () => {
             // given
-            let target: object|Function = function(): void { /* empty */ };
-            let propertyKey: string|symbol|undefined = undefined;
-            let descriptor: TypedPropertyDescriptor<any>|number|undefined = undefined;
+            const target: object|Function = function(): void { /* empty */ };
+            const propertyKey: string|symbol|undefined = undefined;
+            const descriptor: TypedPropertyDescriptor<any>|number|undefined = undefined;
             // when
             constraintProperties = new ConstraintProperties(target, propertyKey, descriptor, 'test');
             // then
@@ -22,9 +22,9 @@ describe('Constraint properties', () => {
 
         it('a method return', () => {
             // given
-            let target: object|Function = {};
-            let propertyKey: string|symbol|undefined = 'testMethod';
-            let descriptor: TypedPropertyDescriptor<any>|number|undefined = {};
+            const target: object|Function = {};
+            const propertyKey: string|symbol|undefined = 'testMethod';
+            const descriptor: TypedPropertyDescriptor<any>|number|undefined = {};
             // when
             constraintProperties = new ConstraintProperties(target, propertyKey, descriptor, 'test');
             // then
@@ -37,9 +37,9 @@ describe('Constraint properties', () => {
 
         it('a method parameter', () => {
             // given
-            let target: object|Function = {};
-            let propertyKey: string|symbol|undefined = 'testMethod';
-            let descriptor: TypedPropertyDescriptor<any>|number|undefined = 0;
+            const target: object|Function = {};
+            const propertyKey: string|symbol|undefined = 'testMethod';
+            const descriptor: TypedPropertyDescriptor<any>|number|undefined = 0;
             // when
             constraintProperties = new ConstraintProperties(target, propertyKey, descriptor, 'test');
             // then
@@ -52,9 +52,9 @@ describe('Constraint properties', () => {
 
         it('a property', () => {
             // given
-            let target: object|Function = {};
-            let propertyKey: string|symbol|undefined = 'testProperty';
-            let descriptor: TypedPropertyDescriptor<any>|number|undefined = undefined;
+            const target: object|Function = {};
+            const propertyKey: string|symbol|undefined = 'testProperty';
+            const descriptor: TypedPropertyDescriptor<any>|number|undefined = undefined;
             // when
             constraintProperties = new ConstraintProperties(target, propertyKey, descriptor, 'test');
             // then
@@ -67,9 +67,9 @@ describe('Constraint properties', () => {
 
         it('a static member', () => {
             // given
-            let target: object|Function = function(): void { /* empty */ };
-            let propertyKey: string|symbol|undefined = 'testProperty';
-            let descriptor: TypedPropertyDescriptor<any>|number|undefined = undefined;
+            const target: object|Function = function(): void { /* empty */ };
+            const propertyKey: string|symbol|undefined = 'testProperty';
+            const descriptor: TypedPropertyDescriptor<any>|number|undefined = undefined;
             // when
             constraintProperties = new ConstraintProperties(target, propertyKey, descriptor, 'test');
             // then

@@ -9,7 +9,6 @@ import { createMockInstance } from 'jest-create-mock-instance';
  global.Date = Object.getPrototypeOf(new Date()).constructor;
 
 describe('Future constraint validator', () => {
-    let futureConstraintValidator: ConstraintValidator<any>;
     let constraintValidationContext: jest.Mocked<ConstraintValidationContext>;
     let constraintDescriptor: jest.Mocked<ConstraintDescriptor>;
     let validatorOptions: ValidatorOptions;
@@ -28,60 +27,60 @@ describe('Future constraint validator', () => {
         constraintValidationContext.getValidator.mockReturnValueOnce(validator);
         constraintDescriptor = {} as jest.Mocked<ConstraintDescriptor>;
         constraintDescriptor.getAttribute = jest.fn<(attributeName: string) => any>();
-        futureConstraintValidator = new FutureConstraintValidator();
     });
 
     it('considers a date in the future to be valid', () => {
         // given
-        let value: Date = new Date('2018-09-20T08:28:02Z');
         constraintDescriptor.getAttribute.mockImplementationOnce(attributeName => {
             if (attributeName === 'present') { return false; }
             return undefined;
         });
-        futureConstraintValidator.initialize(constraintDescriptor);
+        const futureConstraintValidator: ConstraintValidator<any> = new FutureConstraintValidator(constraintDescriptor);
+        const value: Date = new Date('2018-09-20T08:28:02Z');
         // when
-        let result: boolean = futureConstraintValidator.isValid(value, constraintValidationContext);
+        const result: boolean = futureConstraintValidator.isValid(value, constraintValidationContext);
         // then
         expect(result).toBe(true);
     });
 
     it('considers a date in the present to be invalid when present is false', () => {
         // given
-        let value: Date = new Date('2018-09-20T08:28:01Z');
         constraintDescriptor.getAttribute.mockImplementationOnce(attributeName => {
             if (attributeName === 'present') { return false; }
             return undefined;
         });
-        futureConstraintValidator.initialize(constraintDescriptor);
+        const futureConstraintValidator: ConstraintValidator<any> = new FutureConstraintValidator(constraintDescriptor);
+        const value: Date = new Date('2018-09-20T08:28:01Z');
         // when
-        let result: boolean = futureConstraintValidator.isValid(value, constraintValidationContext);
+        const result: boolean = futureConstraintValidator.isValid(value, constraintValidationContext);
         // then
         expect(result).toBe(false);
     });
 
     it('considers a date in the present to be valid when present is true', () => {
         // given
-        let value: Date = new Date('2018-09-20T08:28:01Z');
         constraintDescriptor.getAttribute.mockImplementationOnce(attributeName => {
             if (attributeName === 'present') { return true; }
             return undefined;
         });
-        futureConstraintValidator.initialize(constraintDescriptor);
+        const futureConstraintValidator: ConstraintValidator<any> = new FutureConstraintValidator(constraintDescriptor);
+        const value: Date = new Date('2018-09-20T08:28:01Z');
         // when
-        let result: boolean = futureConstraintValidator.isValid(value, constraintValidationContext);
+        const result: boolean = futureConstraintValidator.isValid(value, constraintValidationContext);
         // then
         expect(result).toBe(true);
     });
 
     it('considers a date in the past to be invalid', () => {
         // given
-        let value: Date = new Date('2018-09-20T08:28:00Z');
         constraintDescriptor.getAttribute.mockImplementationOnce(attributeName => {
             if (attributeName === 'present') { return false; }
             return undefined;
         });
+        const futureConstraintValidator: ConstraintValidator<any> = new FutureConstraintValidator(constraintDescriptor);
+        const value: Date = new Date('2018-09-20T08:28:00Z');
         // when
-        let result: boolean = futureConstraintValidator.isValid(value, constraintValidationContext);
+        const result: boolean = futureConstraintValidator.isValid(value, constraintValidationContext);
         // then
         expect(result).toBe(false);
     });

@@ -5,14 +5,15 @@ import { ConstraintDescriptor } from '@es-validation/decorators';
  * Past constraint validator
  */
 class PastConstraintValidator extends AbstractDateConstraintValidator {
-    private present!: boolean;
+    private readonly present: boolean;
 
     /**
-     * Initialize the validator in preparation for isValid calls
+     * Class constructor
      * @param constraintDescriptor Constraint descriptor
      */
-    initialize(constraintDescriptor: ConstraintDescriptor): void {
-        this.present = constraintDescriptor.getAttribute<boolean>('present')!;
+    constructor(constraintDescriptor: ConstraintDescriptor) {
+        super();
+        this.present = constraintDescriptor.getAttribute<boolean>('present');
     }
 
     /**

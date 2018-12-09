@@ -39,8 +39,13 @@ class ConstraintDescriptorImpl implements ConstraintDescriptor {
      * @param <T>           Attribute value type
      * @return Attribute value
      */
-    getAttribute<T>(attributeName: string): T|undefined {
-        return this.attributes.get(attributeName);
+    getAttribute<T>(attributeName: string): T {
+        const attributeValue: T|undefined = this.attributes.get(attributeName);
+        if (attributeValue !== undefined) {
+            return attributeValue;
+        }
+
+        throw new Error(`unknown attribute ${attributeName}`);
     }
 
 }

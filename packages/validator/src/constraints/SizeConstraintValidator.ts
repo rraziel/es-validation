@@ -5,16 +5,17 @@ import { ConstraintDescriptor } from '@es-validation/decorators';
  * Size constraint validator
  */
 class SizeConstraintValidator extends AbstractSizeConstraintValidator {
-    private minimum!: number;
-    private maximum!: number;
+    private readonly minimum: number;
+    private readonly maximum: number;
 
     /**
-     * Initialize the validator in preparation for isValid calls
+     * Class constructor
      * @param constraintDescriptor Constraint descriptor
      */
-    initialize(constraintDescriptor: ConstraintDescriptor): void {
-        this.minimum = constraintDescriptor.getAttribute<number>('minimum')!;
-        this.maximum = constraintDescriptor.getAttribute<number>('maximum')!;
+    constructor(constraintDescriptor: ConstraintDescriptor) {
+        super();
+        this.minimum = constraintDescriptor.getAttribute<number>('minimum');
+        this.maximum = constraintDescriptor.getAttribute<number>('maximum');
     }
 
     /**

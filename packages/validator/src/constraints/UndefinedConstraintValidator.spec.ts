@@ -1,10 +1,11 @@
 import { UndefinedConstraintValidator } from './UndefinedConstraintValidator';
 import { ConstraintValidator } from './ConstraintValidator';
 import { ConstraintValidationContext } from '../validation';
+import { createMockInstance } from 'jest-create-mock-instance';
 
 describe('Undefined constraint validator', () => {
+    const constraintValidationContext: ConstraintValidationContext = createMockInstance(ConstraintValidationContext as any);
     let undefinedConstraintValidator: ConstraintValidator<any>;
-    let constraintValidationContext: ConstraintValidationContext;
 
     beforeEach(() => {
         undefinedConstraintValidator = new UndefinedConstraintValidator<any>();
@@ -12,18 +13,18 @@ describe('Undefined constraint validator', () => {
 
     it('treats undefined values as valid', () => {
         // given
-        let value: any = undefined;
+        const value: any = undefined;
         // when
-        let result: boolean = undefinedConstraintValidator.isValid(value, constraintValidationContext);
+        const result: boolean = undefinedConstraintValidator.isValid(value, constraintValidationContext);
         // then
         expect(result).toBe(true);
     });
 
     it('treats defined values as invalid', () => {
         // given
-        let value: any = 5;
+        const value: any = 5;
         // when
-        let result: boolean = undefinedConstraintValidator.isValid(value, constraintValidationContext);
+        const result: boolean = undefinedConstraintValidator.isValid(value, constraintValidationContext);
         // then
         expect(result).toBe(false);
     });

@@ -5,14 +5,15 @@ import { ConstraintDescriptor } from '@es-validation/decorators';
  * Negative constraint validator
  */
 class NegativeConstraintValidator extends AbstractNumericConstraintValidator {
-    private zero!: boolean;
+    private readonly zero: boolean;
 
     /**
-     * Initialize the validator in preparation for isValid calls
+     * Class constructor
      * @param constraintDescriptor Constraint descriptor
      */
-    initialize(constraintDescriptor: ConstraintDescriptor): void {
-        this.zero = constraintDescriptor.getAttribute<boolean>('zero')!;
+    constructor(constraintDescriptor: ConstraintDescriptor) {
+        super();
+        this.zero = constraintDescriptor.getAttribute<boolean>('zero');
     }
 
     /**

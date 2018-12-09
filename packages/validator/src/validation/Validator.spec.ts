@@ -1,12 +1,12 @@
 import { Validator } from './Validator';
 import { ValidatorOptions } from './ValidatorOptions';
 import { DateProvider } from './DateProvider';
-import { ConstraintValidator } from '../constraints';
+import { ConstraintValidatorFactory } from '../constraints';
 import { createMockInstance } from 'jest-create-mock-instance';
 
 describe('Validator', () => {
+    const constraintValidators: Map<string, ConstraintValidatorFactory<any>> = new Map<string, ConstraintValidatorFactory<any>>();
     let validator: Validator;
-    let constraintValidators: Map<string, ConstraintValidator<any>> = new Map<string, ConstraintValidator<any>>();
     let validatorOptions: ValidatorOptions;
     let dateProvider: jest.Mocked<DateProvider>;
 
@@ -16,8 +16,8 @@ describe('Validator', () => {
         validator = new Validator(constraintValidators, validatorOptions, dateProvider);
     });
 
-    it('todo', () => {
-
+    it.skip('todo', () => {
+        // TODO
     });
 
 });

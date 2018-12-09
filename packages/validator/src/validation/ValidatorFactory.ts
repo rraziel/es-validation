@@ -3,7 +3,7 @@ import { Validator } from './Validator';
 import { ValidatorOptions } from './ValidatorOptions';
 import {
     ConstraintConstraintValidator,
-    ConstraintValidator,
+    ConstraintValidatorFactory,
     DefinedConstraintValidator,
     EmailConstraintValidator,
     FalseConstraintValidator,
@@ -28,47 +28,50 @@ import {
  * Validator factory
  */
 class ValidatorFactory {
-    private static readonly DEFAULT_CONSTRAINT_VALIDATORS: Map<string, ConstraintValidator<any>> = new Map<string, ConstraintValidator<any>>([
-        ['Constraint', new ConstraintConstraintValidator()],
-        ['Defined', new DefinedConstraintValidator()],
-        ['Email', new EmailConstraintValidator()],
-        ['False', new FalseConstraintValidator()],
-        ['Future', new FutureConstraintValidator()],
-        ['Max', new MaxConstraintValidator()],
-        ['Min', new MinConstraintValidator()],
-        ['Negative', new NegativeConstraintValidator()],
-        ['NotBlank', new NotBlankConstraintValidator()],
-        ['NotEmpty', new NotEmptyConstraintValidator()],
-        ['NotNull', new NotNullConstraintValidator()],
-        ['Null', new NullConstraintValidator()],
-        ['Past', new PastConstraintValidator()],
-        ['Pattern', new PatternConstraintValidator()],
-        ['Positive', new PositiveConstraintValidator()],
-        ['Size', new SizeConstraintValidator()],
-        ['True', new TrueConstraintValidator()],
-        ['Undefined', new UndefinedConstraintValidator()],
-        ['Valid', new ValidConstraintValidator()],
-    ]);
+    private static readonly DEFAULT_CONSTRAINT_VALIDATORS: {[constraintName: string]: ConstraintValidatorFactory<any>} = {
+        'Constraint': constraintProperties => new ConstraintConstraintValidator(constraintProperties),
+        'Defined': () => new DefinedConstraintValidator(),
+        'Email': () => new EmailConstraintValidator(),
+        'False': () => new FalseConstraintValidator(),
+        'Future':  constraintProperties => new FutureConstraintValidator(constraintProperties),
+        'Max': constraintProperties => new MaxConstraintValidator(constraintProperties),
+        'Min': constraintProperties => new MinConstraintValidator(constraintProperties),
+        'Negative': constraintProperties => new NegativeConstraintValidator(constraintProperties),
+        'NotBlank': () => new NotBlankConstraintValidator(),
+        'NotEmpty': () => new NotEmptyConstraintValidator(),
+        'NotNull': () => new NotNullConstraintValidator(),
+        'Null': () => new NullConstraintValidator(),
+        'Past': constraintProperties => new PastConstraintValidator(constraintProperties),
+        'Pattern': constraintProperties => new PatternConstraintValidator(constraintProperties),
+        'Positive': constraintProperties => new PositiveConstraintValidator(constraintProperties),
+        'Size': constraintProperties => new SizeConstraintValidator(constraintProperties),
+        'True': () => new TrueConstraintValidator(),
+        'Undefined': () => new UndefinedConstraintValidator(),
+        'Valid': () => new ValidConstraintValidator()
+    };
 
-    private constraintValidators: Map<string, ConstraintValidator<any>> = new Map<string, ConstraintValidator<any>>(ValidatorFactory.DEFAULT_CONSTRAINT_VALIDATORS);
     private validatorOptions: ValidatorOptions = new ValidatorOptions();
     private dateProvider: DateProvider = new DateProvider();
+    private constraintValidatorFactories: Map<string, ConstraintValidatorFactory<any>> = new Map<string, ConstraintValidatorFactory<any>>(
+        Object.keys(ValidatorFactory.DEFAULT_CONSTRAINT_VALIDATORS).map(constraintName => [constraintName, ValidatorFactory[constraintName]] as [string, ConstraintValidatorFactory<any>])
+    );
 
     /**
-     * Set the constraint validators
-     * @param constraintValidators Constraint validators
+     * Set the constraint validator factories
+     * @param constraintValidatorFactories Constraint validator factories
      */
-    setConstraintValidators(constraintValidators: Map<string, ConstraintValidator<any>>): void {
-        this.constraintValidators = constraintValidators;
+    setConstraintValidatorFactories(constraintValidatorFactories: Map<string, ConstraintValidatorFactory<any>>): this {
+        this.constraintValidatorFactories = constraintValidatorFactories;
+        return this;
     }
 
     /**
-     * Set a constraint validator
-     * @param constraintName      Constraint name
-     * @param constraintValidator Constraint validator
+     * Set a constraint validator factory
+     * @param constraintName             Constraint name
+     * @param constraintValidatorFactory Constraint validator factory
      */
-    setConstraintValidator(constraintName: string, constraintValidator: ConstraintValidator<any>): ValidatorFactory {
-        this.constraintValidators.set(constraintName, constraintValidator);
+    setConstraintValidatorFactory(constraintName: string, constraintValidatorFactory: ConstraintValidatorFactory<any>): this {
+        this.constraintValidatorFactories.set(constraintName, constraintValidatorFactory);
         return this;
     }
 
@@ -76,8 +79,8 @@ class ValidatorFactory {
      * Remove a constraint validator
      * @param constraintName Constraint name
      */
-    removeConstraintValidator(constraintName: string): ValidatorFactory {
-        this.constraintValidators.delete(constraintName);
+    removeConstraintValidator(constraintName: string): this {
+        this.constraintValidatorFactories.delete(constraintName);
         return this;
     }
 
@@ -85,16 +88,18 @@ class ValidatorFactory {
      * Set the date provider
      * @param dateProvider Date provider
      */
-    setDateProvider(dateProvider: DateProvider): void {
+    setDateProvider(dateProvider: DateProvider): this {
         this.dateProvider = dateProvider;
+        return this;
     }
 
     /**
      * Set the validator options
      * @param validatorOptions Validator options
      */
-    setValidatorOptions(validatorOptions: ValidatorOptions): void {
+    setValidatorOptions(validatorOptions: ValidatorOptions): this {
         this.validatorOptions = validatorOptions;
+        return this;
     }
 
     /**
@@ -102,7 +107,7 @@ class ValidatorFactory {
      * @return Validator
      */
     createValidator(): Validator {
-        return new Validator(this.constraintValidators, this.validatorOptions, this.dateProvider);
+        return new Validator(this.constraintValidatorFactories, this.validatorOptions, this.dateProvider);
     }
 
 }

@@ -9,7 +9,7 @@ import { ConstraintProperties } from './ConstraintProperties';
  * @param descriptor  Descriptor
  */
 const Future: ConstraintDecorator = <T>(target, propertyKey, descriptor) => {
-    let constraintProperties: ConstraintProperties<T> = new ConstraintProperties(target, propertyKey, descriptor, 'Future');
+    const constraintProperties: ConstraintProperties<T> = new ConstraintProperties(target, propertyKey, descriptor, 'Future');
 
     constraintProperties.attributes = {
         present: false
@@ -25,7 +25,7 @@ const Future: ConstraintDecorator = <T>(target, propertyKey, descriptor) => {
  * @param descriptor  Descriptor
  */
 const FutureOrPresent: ConstraintDecorator = <T>(target, propertyKey, descriptor) => {
-    let constraintProperties: ConstraintProperties<T> = new ConstraintProperties(target, propertyKey, descriptor, 'Future');
+    const constraintProperties: ConstraintProperties<T> = new ConstraintProperties(target, propertyKey, descriptor, 'Future');
 
     constraintProperties.decoratorName = 'FutureOrPresent';
     constraintProperties.attributes = {

@@ -10,7 +10,7 @@ import { ConstraintProperties } from './ConstraintProperties';
  */
 function Digits(integer: number, fraction: number): ConstraintDecorator {
     return <T>(target, propertyKey, descriptor) => {
-        let constraintProperties: ConstraintProperties<T> = new ConstraintProperties<T>(target, propertyKey, descriptor, 'Digits');
+        const constraintProperties: ConstraintProperties<T> = new ConstraintProperties<T>(target, propertyKey, descriptor, 'Digits');
 
         constraintProperties.attributes = {
             integer: integer,

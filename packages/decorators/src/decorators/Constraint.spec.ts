@@ -6,9 +6,9 @@ describe('@Constraint decorator', () => {
 
     it('adds a constraint', () => {
         // given
-        let target: object|Function = function(): void { /* empty */ };
-        let propertyKey: string|symbol = 'test';
-        let constraintValidator: <T>(constraintValue: T) => boolean = jest.fn<(constraintValue: any) => void>();
+        const target: object|Function = function(): void { /* empty */ };
+        const propertyKey: string|symbol = 'test';
+        const constraintValidator: <T>(constraintValue: T) => boolean = jest.fn<(constraintValue: any) => void>();
         // when
         Constraint(constraintValidator)(target, propertyKey, undefined);
         // then

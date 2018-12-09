@@ -22,9 +22,9 @@ function getDecoratorName<T>(constraintProperties: ConstraintProperties<T>): str
  * @param constraintProperties Constraint properties
  */
 function throwStaticMemberUsageWithDescriptor<T>(constraintProperties: ConstraintProperties<T>): void {
-    let decoratorName: string = getDecoratorName(constraintProperties);
-    let className: string = (constraintProperties.target as Function).name;
-    let methodName: string = constraintProperties.propertyKey as string;
+    const decoratorName: string = getDecoratorName(constraintProperties);
+    const className: string = (constraintProperties.target as Function).name;
+    const methodName: string = constraintProperties.propertyKey as string;
 
     if (constraintProperties.descriptor instanceof Object) {
         throw new Error(`Decorator @${decoratorName} cannot be applied to static method ${className}.${methodName}`);
@@ -41,7 +41,7 @@ function throwStaticMemberUsage<T>(constraintProperties: ConstraintProperties<T>
     if (constraintProperties.descriptor !== undefined) {
         throwStaticMemberUsageWithDescriptor(constraintProperties);
     } else {
-        let decoratorName: string = getDecoratorName(constraintProperties);
+        const decoratorName: string = getDecoratorName(constraintProperties);
         throw new Error(`Decorator @${decoratorName} cannot be applied to static property ${(constraintProperties.target as Function).name}.${constraintProperties.propertyKey as string}`);
     }
 }
@@ -68,13 +68,13 @@ function updateClassDescriptor<T>(targetClass: ClassConstructor<T>, callback: (c
  * @return Constraint descriptor
  */
 function buildConstraintDescriptor<T>(constraintProperties: ConstraintProperties<T>): ConstraintDescriptor {
-    let constraintName: string = constraintProperties.constraintName;
-    let attributeMap: Map<string, any> = new Map<string, any>();
+    const constraintName: string = constraintProperties.constraintName;
+    const attributeMap: Map<string, any> = new Map<string, any>();
 
     if (constraintProperties.attributes) {
-        let attributes: {[attributeName: string]: any} = constraintProperties.attributes;
+        const attributes: {[attributeName: string]: any} = constraintProperties.attributes;
 
-        for (let attributeName in attributes) {
+        for (const attributeName in attributes) {
             attributeMap.set(attributeName, attributes[attributeName]);
         }
     }
@@ -100,8 +100,8 @@ function addParameterConstraint<C, R>(methodDescriptor: MethodDescriptorImpl<C, 
  * @param constraintDescriptor Constraint descriptor
  */
 function addConstructorParameterConstraint<T>(constraintProperties: ConstraintProperties<T>, constraintDescriptor: ConstraintDescriptor): void {
-    let targetClass: ClassConstructor<any> = constraintProperties.target as ClassConstructor<any>;
-    let parameterIndex: number = constraintProperties.descriptor as number;
+    const targetClass: ClassConstructor<any> = constraintProperties.target as ClassConstructor<any>;
+    const parameterIndex: number = constraintProperties.descriptor as number;
     updateClassDescriptor(targetClass, classDescriptor => classDescriptor.updateConstructorDescriptor(methodDescriptor =>  addParameterConstraint(methodDescriptor, parameterIndex, constraintDescriptor)));
 }
 
@@ -111,9 +111,9 @@ function addConstructorParameterConstraint<T>(constraintProperties: ConstraintPr
  * @param constraintDescriptor Constraint descriptor
  */
 function addMethodParameterConstraint<T>(constraintProperties: ConstraintProperties<T>, constraintDescriptor: ConstraintDescriptor): void {
-    let targetClass: ClassConstructor<any> = constraintProperties.target.constructor as ClassConstructor<any>;
-    let propertyKey: string|symbol = constraintProperties.propertyKey!;
-    let parameterIndex: number = constraintProperties.descriptor as number;
+    const targetClass: ClassConstructor<any> = constraintProperties.target.constructor as ClassConstructor<any>;
+    const propertyKey: string|symbol = constraintProperties.propertyKey!;
+    const parameterIndex: number = constraintProperties.descriptor as number;
     updateClassDescriptor(targetClass, classDescriptor => classDescriptor.updateMethodDescriptor(propertyKey, methodDescriptor => addParameterConstraint(methodDescriptor, parameterIndex, constraintDescriptor)));
 }
 
@@ -123,8 +123,8 @@ function addMethodParameterConstraint<T>(constraintProperties: ConstraintPropert
  * @param constraintDescriptor Constraint descriptor
  */
 function addMethodReturnConstraint<T>(constraintProperties: ConstraintProperties<T>, constraintDescriptor: ConstraintDescriptor): void {
-    let targetClass: ClassConstructor<any> = constraintProperties.target.constructor as ClassConstructor<any>;
-    let propertyKey: string|symbol = constraintProperties.propertyKey!;
+    const targetClass: ClassConstructor<any> = constraintProperties.target.constructor as ClassConstructor<any>;
+    const propertyKey: string|symbol = constraintProperties.propertyKey!;
     updateClassDescriptor(targetClass, classDescriptor => classDescriptor.updateMethodDescriptor(propertyKey, methodDescriptor => methodDescriptor.addConstraintDescriptor(constraintDescriptor)));
 }
 
@@ -134,8 +134,8 @@ function addMethodReturnConstraint<T>(constraintProperties: ConstraintProperties
  * @param constraintDescriptor Constraint descriptor
  */
 function addPropertyConstraint<T>(constraintProperties: ConstraintProperties<T>, constraintDescriptor: ConstraintDescriptor): void {
-    let targetClass: ClassConstructor<any> = constraintProperties.target.constructor as ClassConstructor<any>;
-    let propertyKey: string|symbol = constraintProperties.propertyKey!;
+    const targetClass: ClassConstructor<any> = constraintProperties.target.constructor as ClassConstructor<any>;
+    const propertyKey: string|symbol = constraintProperties.propertyKey!;
     updateClassDescriptor(targetClass, classDescriptor => classDescriptor.updatePropertyDescriptor(propertyKey, propertyDescriptor => propertyDescriptor.addConstraintDescriptor(constraintDescriptor)));
 }
 
@@ -148,7 +148,7 @@ function addConstraint<T>(constraintProperties: ConstraintProperties<T>): void {
         throwStaticMemberUsage(constraintProperties);
     }
 
-    let constraintDescriptor: ConstraintDescriptor = buildConstraintDescriptor(constraintProperties);
+    const constraintDescriptor: ConstraintDescriptor = buildConstraintDescriptor(constraintProperties);
 
     if (constraintProperties.appliesToConstructorParameter()) {
         addConstructorParameterConstraint(constraintProperties, constraintDescriptor);

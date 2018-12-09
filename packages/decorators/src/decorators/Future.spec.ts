@@ -9,8 +9,8 @@ describe('@Future decorator', () => {
 
     it('adds a constraint', () => {
         // given
-        let target: object|Function = function(): void { /* empty */ };
-        let propertyKey: string|symbol = 'test';
+        const target: object|Function = function(): void { /* empty */ };
+        const propertyKey: string|symbol = 'test';
         addConstraint.mockReset();
         // when
         Future(target, propertyKey, undefined);
@@ -25,8 +25,8 @@ describe('@FutureOrPresent decorator', () => {
 
     it('adds a constraint', () => {
         // given
-        let target: object|Function = function(): void { /* empty */ };
-        let propertyKey: string|symbol = 'test';
+        const target: object|Function = function(): void { /* empty */ };
+        const propertyKey: string|symbol = 'test';
         addConstraint.mockReset();
         // when
         FutureOrPresent(target, propertyKey, undefined);

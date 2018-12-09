@@ -1,5 +1,6 @@
 export { ConstraintConstraintValidator } from './ConstraintConstraintValidator';
 export { ConstraintValidator } from './ConstraintValidator';
+export { ConstraintValidatorFactory } from './ConstraintValidatorFactory';
 export { DefinedConstraintValidator } from './DefinedConstraintValidator';
 export { EmailConstraintValidator } from './EmailConstraintValidator';
 export { FutureConstraintValidator } from './FutureConstraintValidator';

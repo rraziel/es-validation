@@ -1,7 +1,7 @@
 import { ConstraintViolation } from './ConstraintViolation';
 import { DateProvider } from './DateProvider';
 import { ValidatorOptions } from './ValidatorOptions';
-import { ConstraintValidator } from '../constraints';
+import { ConstraintValidatorFactory } from '../constraints';
 import {
     loadClassDescriptor,
     ClassConstructor,
@@ -12,18 +12,18 @@ import {
  * Validator
  */
 class Validator {
-    private readonly constraintValidators: Map<string, ConstraintValidator<any>>;
+    private readonly constraintValidatorFactories: Map<string, ConstraintValidatorFactory<any>>;
     private readonly validatorOptions: ValidatorOptions;
     private readonly dateProvider: DateProvider;
 
     /**
      * Class constructor
-     * @param constraintValidators Constraint validators
-     * @param validatorOptions     Validator options
-     * @param dateProvider         Date provider
+     * @param constraintValidatorFactories Constraint validator factories
+     * @param validatorOptions             Validator options
+     * @param dateProvider                 Date provider
      */
-    constructor(constraintValidators: Map<string, ConstraintValidator<any>>, validatorOptions?: ValidatorOptions, dateProvider?: DateProvider) {
-        this.constraintValidators = constraintValidators;
+    constructor(constraintValidatorFactories: Map<string, ConstraintValidatorFactory<any>>, validatorOptions?: ValidatorOptions, dateProvider?: DateProvider) {
+        this.constraintValidatorFactories = constraintValidatorFactories;
         this.validatorOptions = validatorOptions || new ValidatorOptions();
         this.dateProvider = dateProvider || new DateProvider();
     }

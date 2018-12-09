@@ -9,7 +9,7 @@ import { ConstraintProperties } from './ConstraintProperties';
  */
 function Constraint(constraintValidator: <T>(value: T) => boolean): ConstraintDecorator {
     return <T>(target, propertyKey, descriptor) => {
-        let constraintProperties: ConstraintProperties<T> = new ConstraintProperties<T>(target, propertyKey, descriptor, 'Constraint');
+        const constraintProperties: ConstraintProperties<T> = new ConstraintProperties<T>(target, propertyKey, descriptor, 'Constraint');
 
         constraintProperties.attributes = {
             validator: constraintValidator

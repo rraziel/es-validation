@@ -14,7 +14,7 @@ const METADATAKEY_TYPE: string = 'design:type';
  * @return Class descriptor
  */
 function loadClassDescriptor<T>(targetClass: ClassConstructor<T>): ClassDescriptor<T>|undefined {
-    let classDescriptor: ClassDescriptor<T>|undefined = Reflect.getOwnMetadata(METADATAKEY_CLASS, targetClass);
+    const classDescriptor: ClassDescriptor<T>|undefined = Reflect.getOwnMetadata(METADATAKEY_CLASS, targetClass);
     return classDescriptor;
 }
 

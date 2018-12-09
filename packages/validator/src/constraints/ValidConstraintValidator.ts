@@ -14,7 +14,7 @@ class ValidConstraintValidator<T> extends AbstractConstraintValidator<T> {
      * @return true if the value passes the constraint
      */
     protected isValidValue(value: T, context: ConstraintValidationContext): boolean {
-        let constraintViolations: Set<ConstraintViolation<T>> = context.getValidator().validate(value);
+        const constraintViolations: Set<ConstraintViolation<T>> = context.getValidator().validate(value);
         return constraintViolations.size === 0;
     }
 

@@ -3,17 +3,17 @@ import { ConstraintDescriptor } from '@es-validation/decorators';
 
 /**
  * Future constraint validator
- * @param <T> Value type
  */
-class FutureConstraintValidator<T> extends AbstractDateConstraintValidator {
-    private present!: boolean;
+class FutureConstraintValidator extends AbstractDateConstraintValidator {
+    private readonly present: boolean;
 
     /**
-     * Initialize the validator in preparation for isValid calls
+     * Class constructor
      * @param constraintDescriptor Constraint descriptor
      */
-    initialize(constraintDescriptor: ConstraintDescriptor): void {
-        this.present = constraintDescriptor.getAttribute<boolean>('present')!;
+    constructor(constraintDescriptor: ConstraintDescriptor) {
+        super();
+        this.present = constraintDescriptor.getAttribute<boolean>('present');
     }
 
     /**

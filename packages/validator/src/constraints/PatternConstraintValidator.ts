@@ -5,21 +5,15 @@ import { ConstraintDescriptor } from '@es-validation/decorators';
  * Pattern constraint validator
  */
 class PatternConstraintValidator extends AbstractConstraintValidator<string> {
-    private regularExpression!: RegExp;
+    private readonly regularExpression: RegExp;
 
     /**
      * Class constructor
-     */
-    constructor() {
-        super(String);
-    }
-
-    /**
-     * Initialize the validator in preparation for isValid calls
      * @param constraintDescriptor Constraint descriptor
      */
-    initialize(constraintDescriptor: ConstraintDescriptor): void {
-        this.regularExpression = constraintDescriptor.getAttribute<RegExp>('regExp')!;
+    constructor(constraintDescriptor: ConstraintDescriptor) {
+        super(String);
+        this.regularExpression = constraintDescriptor.getAttribute<RegExp>('regExp');
     }
 
     /**

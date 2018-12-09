@@ -5,14 +5,15 @@ import { ConstraintDescriptor } from '@es-validation/decorators';
  * Max constraint validator
  */
 class MaxConstraintValidator extends AbstractNumericConstraintValidator {
-    private maximum!: number;
+    private readonly maximum: number;
 
     /**
-     * Initialize the validator in preparation for isValid calls
+     * Class constructor
      * @param constraintDescriptor Constraint descriptor
      */
-    initialize(constraintDescriptor: ConstraintDescriptor): void {
-        this.maximum = constraintDescriptor.getAttribute<number>('maximum')!;
+    constructor(constraintDescriptor: ConstraintDescriptor) {
+        super();
+        this.maximum = constraintDescriptor.getAttribute<number>('maximum');
     }
 
     /**

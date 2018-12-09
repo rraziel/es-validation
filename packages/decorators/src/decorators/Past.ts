@@ -9,7 +9,7 @@ import { ConstraintProperties } from './ConstraintProperties';
  * @param descriptor  Descriptor
  */
 const Past: ConstraintDecorator = <T>(target, propertyKey, descriptor) => {
-    let constraintProperties: ConstraintProperties<T> = new ConstraintProperties<T>(target, propertyKey, descriptor, 'Past');
+    const constraintProperties: ConstraintProperties<T> = new ConstraintProperties<T>(target, propertyKey, descriptor, 'Past');
 
     constraintProperties.attributes = {
         present: false
@@ -25,7 +25,7 @@ const Past: ConstraintDecorator = <T>(target, propertyKey, descriptor) => {
  * @param descriptor  Descriptor
  */
 const PastOrPresent: ConstraintDecorator = <T>(target, propertyKey, descriptor) => {
-    let constraintProperties: ConstraintProperties<T> = new ConstraintProperties<T>(target, propertyKey, descriptor, 'Past');
+    const constraintProperties: ConstraintProperties<T> = new ConstraintProperties<T>(target, propertyKey, descriptor, 'Past');
 
     constraintProperties.decoratorName = 'PastOrPresent';
     constraintProperties.attributes = {

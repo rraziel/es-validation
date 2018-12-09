@@ -14,7 +14,7 @@ function Size(minimum: number = 0, maximum: number = Number.MAX_SAFE_INTEGER): C
     }
 
     return <T>(target, propertyKey, descriptor) => {
-        let constraintProperties: ConstraintProperties<T> = new ConstraintProperties<T>(target, propertyKey, descriptor, 'Size');
+        const constraintProperties: ConstraintProperties<T> = new ConstraintProperties<T>(target, propertyKey, descriptor, 'Size');
 
         constraintProperties.attributes = {
             mininum: minimum,

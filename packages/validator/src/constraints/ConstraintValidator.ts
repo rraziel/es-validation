@@ -8,12 +8,6 @@ import { ConstraintDescriptor } from '@es-validation/decorators';
 abstract class ConstraintValidator<T> {
 
     /**
-     * Initialize the validator in preparation for isValid calls
-     * @param constraintDescriptor Constraint descriptor
-     */
-    abstract initialize(constraintDescriptor: ConstraintDescriptor): void;
-
-    /**
      * Test whether the value is valid
      * @param value   Value to validate
      * @param context Constraint validation context

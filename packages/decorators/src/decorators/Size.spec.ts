@@ -10,8 +10,8 @@ describe('@Size decorator', () => {
 
     it('adds a constraint', () => {
         // given
-        let target: object|Function = function(): void { /* empty */ };
-        let propertyKey: string|symbol = 'test';
+        const target: object|Function = function(): void { /* empty */ };
+        const propertyKey: string|symbol = 'test';
         // when
         Size(2, 4)(target, propertyKey, undefined);
         // then
@@ -21,8 +21,8 @@ describe('@Size decorator', () => {
 
     it('adds a constraint with default values', () => {
         // given
-        let target: object|Function = function(): void { /* empty */ };
-        let propertyKey: string|symbol = 'test';
+        const target: object|Function = function(): void { /* empty */ };
+        const propertyKey: string|symbol = 'test';
         // when
         Size()(target, propertyKey, undefined);
         // then
@@ -32,8 +32,8 @@ describe('@Size decorator', () => {
 
     it('rejects negative values', () => {
         // given
-        let target: object|Function = function(): void { /* empty */ };
-        let propertyKey: string|symbol = 'test';
+        const target: object|Function = function(): void { /* empty */ };
+        const propertyKey: string|symbol = 'test';
         // expect
         expect(() => {
             Size(-1, -2)(target, propertyKey, undefined);

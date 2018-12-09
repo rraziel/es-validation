@@ -7,8 +7,8 @@ describe('Constraint violation', () => {
         constraintViolation = new ConstraintViolation<any>();
     });
 
-    it('todo', () => {
-
+    it.skip('todo', () => {
+        // TODO
     });
 
 });

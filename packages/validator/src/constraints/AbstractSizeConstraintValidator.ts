@@ -20,7 +20,7 @@ abstract class AbstractSizeConstraintValidator extends AbstractConstraintValidat
      * @return true if the value passes the constraint
      */
     isValidValue(value: SizeConstraintType): boolean {
-        let valueClass: Function = Object.getPrototypeOf(value).constructor;
+        const valueClass: Function = Object.getPrototypeOf(value).constructor;
         let size: number;
 
         if (valueClass === String) {
@@ -31,9 +31,11 @@ abstract class AbstractSizeConstraintValidator extends AbstractConstraintValidat
             size = (value as any as Map<any, any>).size;
         } else if (valueClass === Set) {
             size = (value as any as Set<any>).size;
+        } else {
+            throw new Error(`unknown value type ${valueClass}`);
         }
 
-        return this.isValidSize(size!);
+        return this.isValidSize(size);
     }
 
     /**

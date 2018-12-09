@@ -9,7 +9,7 @@ import { ConstraintProperties } from './ConstraintProperties';
  * @param descriptor  Descriptor
  */
 const Negative: ConstraintDecorator = <T>(target, propertyKey, descriptor) => {
-    let constraintProperties: ConstraintProperties<T> = new ConstraintProperties<T>(target, propertyKey, descriptor, 'Negative');
+    const constraintProperties: ConstraintProperties<T> = new ConstraintProperties<T>(target, propertyKey, descriptor, 'Negative');
 
     constraintProperties.attributes = {
         zero: false
@@ -25,7 +25,7 @@ const Negative: ConstraintDecorator = <T>(target, propertyKey, descriptor) => {
  * @param descriptor  Descriptor
  */
 const NegativeOrZero: ConstraintDecorator = <T>(target, propertyKey, descriptor) => {
-    let constraintProperties: ConstraintProperties<T> = new ConstraintProperties<T>(target, propertyKey, descriptor, 'Negative');
+    const constraintProperties: ConstraintProperties<T> = new ConstraintProperties<T>(target, propertyKey, descriptor, 'Negative');
 
     constraintProperties.decoratorName = 'NegativeOrZero';
     constraintProperties.attributes = {

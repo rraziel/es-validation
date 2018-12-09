@@ -44,7 +44,7 @@ class ClassDescriptorImpl<C> implements ClassDescriptor<C> {
     updatePropertyDescriptor<T>(propertyKey: string|symbol, callback: (propertyDescriptor: PropertyDescriptorImpl<T>) => void): void {
         let propertyDescriptor: PropertyDescriptorImpl<T>|undefined = this.propertyDescriptors.get(propertyKey);
         if (!propertyDescriptor) {
-            let propertyClass: ClassConstructor<T> = getPropertyClass(this.targetClass, propertyKey);
+            const propertyClass: ClassConstructor<T> = getPropertyClass(this.targetClass, propertyKey);
             propertyDescriptor = new PropertyDescriptorImpl(propertyKey, propertyClass);
             this.propertyDescriptors.set(propertyKey, propertyDescriptor);
         }

@@ -68,7 +68,7 @@ class MethodDescriptorImpl<C, R> extends ConstrainedDescriptorImpl implements Me
     updateParameterDescriptor<T>(parameterIndex: number, callback: (parameterDescriptor: MethodParameterDescriptorImpl<T>) => void): void {
         let parameterDescriptor: MethodParameterDescriptorImpl<T>|undefined = this.parameterDescriptors.find(descriptor => descriptor.getParameterIndex() === parameterIndex);
         if (!parameterDescriptor) {
-            let parameterClass: ClassConstructor<T> = getMethodParameterClass<C, T>(this.typeClass, this.propertyKey, parameterIndex);
+            const parameterClass: ClassConstructor<T> = getMethodParameterClass<C, T>(this.typeClass, this.propertyKey, parameterIndex);
             parameterDescriptor = new MethodParameterDescriptorImpl<T>(parameterClass, parameterIndex);
             this.parameterDescriptors.push(parameterDescriptor);
         }

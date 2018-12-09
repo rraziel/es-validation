@@ -20,7 +20,7 @@ abstract class AbstractDateConstraintValidator extends AbstractConstraintValidat
      * @return true if the value passes the constraint
      */
     isValidValue(value: Date, context: ConstraintValidationContext): boolean {
-        let now: Date = context.getValidator().getDateProvider().getDate();
+        const now: Date = context.getValidator().getDateProvider().getDate();
         return this.isValidDate(value, now);
     }
 
