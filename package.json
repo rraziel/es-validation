@@ -57,7 +57,7 @@
     "jest-create-mock-instance": "1.1.0",
     "jest-date-mock": "1.0.6",
     "jest-junit-reporter": "1.1.0",
-    "lerna": "3.6.0",
+    "lerna": "3.10.5",
     "reflect-metadata": "0.1.12",
     "ts-jest": "23.10.5",
     "ts-node": "7.0.1",
